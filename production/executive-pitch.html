@@ -410,13 +410,49 @@
       });
 
       const slideRegex = /--- SLIDE (\d+) ---\n([\s\S]*?)(?=\n--- SLIDE \d+ ---|$)/g;
-      const slides = [];
+      const rawSlides = [];
       for (const m of text.matchAll(slideRegex)) {
-        slides.push({
+        rawSlides.push({
           num: Number(m[1]),
           lines: m[2].split("\n").map(s => s.trim()).filter(Boolean),
         });
       }
+
+      // Remove "Module 8 · The Ask" from the executive pitch.
+      // (Deck contains multiple "ASK" slides; we skip any slide that is primarily the ask/use-of-funds/options.)
+      const askMatchers = [
+        "MODULE 08",
+        "THE ASK",
+        "THE QUESTION THAT",
+        "USE OF FUNDS",
+        "Validation Sprint",
+        "Sprint 0",
+        "Full Phase 1",
+      ];
+
+      function isAskSlide(slide) {
+        const hay = slide.lines.join(" ").toLowerCase();
+        return askMatchers.some(k => hay.includes(k.toLowerCase()));
+      }
+
+      // Normalize pricing language in "Module 7 · Revenue Model" to match the homepage pricing.
+      // If the deck already has annual tiers, this is a no-op.
+      function normalizePricingLine(line) {
+        return line
+          .replace(/\$39\s*\/?\s*mo\b/gi, "$500/year")
+          .replace(/\$99\s*\/?\s*mo\b/gi, "$1,000/year")
+          .replace(/\$39\s*mo\b/gi, "$500/year")
+          .replace(/\$99\s*mo\b/gi, "$1,000/year")
+          .replace(/\$39\/month\b/gi, "$500/year")
+          .replace(/\$99\/month\b/gi, "$1,000/year");
+      }
+
+      const slides = rawSlides
+        .filter(s => !isAskSlide(s))
+        .map(s => ({
+          ...s,
+          lines: s.lines.map(normalizePricingLine),
+        }));
 
       document.body.innerHTML = "";
 
