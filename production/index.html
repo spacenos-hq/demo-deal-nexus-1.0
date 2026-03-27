@@ -502,6 +502,7 @@ footer{
     <a href="#how">How It Works</a>
     <a href="#moat">The Moat</a>
     <a href="#roi">ROI</a>
+    <a href="#growth">Growth</a>
     <a href="demand-signals.html" class="nav-feature">Demand Signals</a>
     <a href="executive-pitch.html" class="nav-feature">Executive Pitch</a>
     <a href="mockups/dealnexus-product-mockup.html" class="nav-feature">Product Mockup</a>
@@ -873,9 +874,9 @@ footer{
             <span class="vs-li">Unfiltered</span>
           </div>
           <div class="vs-row">
-            <span class="vs-wp">$39/month</span>
+            <span class="vs-wp">$500/year</span>
             <span class="vs-metric">price</span>
-            <span class="vs-li">$99+/month</span>
+            <span class="vs-li">$120+/month</span>
           </div>
           <div class="vs-row" style="border-bottom:none;">
             <span class="vs-wp">Deal-specific vertical</span>
@@ -897,6 +898,128 @@ footer{
 </section>
 
 <!-- ═══════════════════════════════════════════════
+     GROWTH
+═══════════════════════════════════════════════ -->
+<section class="problem-section" id="growth">
+  <div class="section-inner">
+    <span class="section-label">Growth</span>
+    <h2 class="section-h2 fade-up">How we counter problems related to <span class="teal">growth</span>.</h2>
+    <p class="section-sub fade-up fade-up-delay-1" style="max-width:760px;">
+      Yes. Here are the real options, ranked by feasibility and trust preservation:
+    </p>
+
+    <div class="problem-cards">
+      <div class="problem-card fade-up">
+        <div class="problem-card-head">
+          <div class="problem-icon" style="background:rgba(0,201,177,0.12);border:1px solid rgba(0,201,177,0.35);">Tier 1</div>
+          <div class="problem-card-title">High trust, buildable now</div>
+        </div>
+        <div class="problem-card-text" style="font-size:14px;">
+          <b style="color:var(--white);">LinkedIn OAuth import</b><br>
+          User connects LinkedIn, you pull their 1st-degree connections with names, titles, companies. Map against existing DealNexus users. No cold outreach — just graph enrichment. LinkedIn allows this via their API (with restrictions). The catch: LinkedIn throttles heavily and may revoke access if you're seen as extracting graph data. Workaround: position it as "find your LinkedIn connections already on DealNexus" — same framing as Facebook's "find friends" feature. Legally safe, politically careful.
+          <br><br>
+          <b style="color:var(--white);">Email contact import (Gmail / Outlook OAuth)</b><br>
+          User grants read-only Gmail/Outlook access. You parse the To/From/CC fields of sent mail — not content, just who they email regularly. Frequency of contact = trust signal. Someone you email 3x/week is a stronger trust node than someone you emailed once in 2019. This is how Superhuman, Mixmax, and Clearbit Reveal work. High signal, low friction, strong legal precedent.
+          <br><br>
+          <b style="color:var(--white);">Calendar import (Google Calendar / Outlook)</b><br>
+          Who have you met with in the last 12 months? Meeting frequency = real-world relationship strength. A lender you've had 8 calls with is a much warmer node than a LinkedIn connection you've never spoken to. Calendar is arguably the highest-trust signal available because it reflects actual time invested.
+        </div>
+      </div>
+
+      <div class="problem-card fade-up fade-up-delay-1">
+        <div class="problem-card-head">
+          <div class="problem-icon" style="background:rgba(240,180,41,0.12);border:1px solid rgba(240,180,41,0.35);">Tier 2</div>
+          <div class="problem-card-title">Useful but noisier</div>
+        </div>
+        <div class="problem-card-text" style="font-size:14px;">
+          <b style="color:var(--white);">Twitter/X follow graph</b><br>
+          Pull who a user follows and who follows them back (mutual follows = weak trust signal). Useful for the startup/angel vertical specifically — many founders and angels are active on X and their follow graph maps loosely to their professional network. Not useful for RE lenders who aren't on X.
+          <br><br>
+          <b style="color:var(--white);">WhatsApp group membership (indirect)</b><br>
+          You can't read WhatsApp programmatically, but you can let users manually add their WhatsApp group members by sharing a DealNexus invite link into the group. One share → everyone in that group gets an invite with context. This is organic but powerful — WhatsApp groups are where real estate deals already happen.
+          <br><br>
+          <b style="color:var(--white);">AngelList / Crunchbase profile link</b><br>
+          For the startup vertical: user pastes their AngelList URL, you scrape their portfolio companies, co-investors, and advisors. Maps the venture graph without API access. Crude but effective for seeding the angel side of the network.
+        </div>
+      </div>
+
+      <div class="problem-card fade-up fade-up-delay-2">
+        <div class="problem-card-head">
+          <div class="problem-icon" style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.35);">Tier 3</div>
+          <div class="problem-card-title">Interesting but complex</div>
+        </div>
+        <div class="problem-card-text" style="font-size:14px;">
+          <b style="color:var(--white);">CRM sync (HubSpot / Salesforce)</b><br>
+          Lenders and serious flippers already have their contacts in a CRM. A one-click HubSpot OAuth import would pull every contact they've ever worked with into the trust graph — pre-tagged by deal history if the CRM data is structured. High value, but only relevant for power users ($1K Partner tier). Could be a feature exclusive to that tier.
+          <br><br>
+          <b style="color:var(--white);">SMS/iMessage history (iOS Shortcuts / Android)</b><br>
+          Who you text regularly is a stronger trust signal than who you follow on LinkedIn. Apple doesn't expose this via API, but users can voluntarily export their SMS history via a Shortcut and upload it. Niche but worth offering as a power feature.
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-card fade-up" style="margin-top:18px;background:var(--navy3);border-color:rgba(240,180,41,0.22);">
+      <div class="problem-card-head">
+        <div class="problem-icon" style="background:rgba(240,180,41,0.14);border:1px solid rgba(240,180,41,0.35);">Architecture</div>
+        <div class="problem-card-title">The right architecture</div>
+      </div>
+      <div class="problem-card-text" style="font-size:14px;">
+        Don't pick one. Layer them:
+        <div style="margin-top:12px;background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;font-family:var(--mono);font-size:12px;line-height:1.7;color:rgba(244,246,250,0.82);">
+          Phone contacts     → highest trust weight (1.0)<br>
+          Calendar meetings  → high trust weight (0.85)<br>
+          Email frequency    → medium-high (0.7)<br>
+          LinkedIn 1st-degree → medium (0.5)<br>
+          Twitter mutual     → low (0.25)
+        </div>
+        <div style="margin-top:10px;">
+          Every data source feeds the same trust graph with a different weight. The AI then routes intros along the highest-weighted path, not just the shortest.
+        </div>
+        <div style="margin-top:10px;color:rgba(244,246,250,0.86);">
+          <b>This is the moat deepener</b> — competitors can copy one import method. Nobody has built a multi-source trust weight graph that gets smarter with every connected data source.
+        </div>
+      </div>
+    </div>
+
+    <div class="problem-card fade-up" style="margin-top:18px;background:rgba(255,107,107,0.07);border-color:rgba(255,107,107,0.22);">
+      <div class="problem-card-head">
+        <div class="problem-icon" style="background:rgba(255,107,107,0.14);border:1px solid rgba(255,107,107,0.35);">Caution</div>
+        <div class="problem-card-title">One caution on LinkedIn specifically</div>
+      </div>
+      <div class="problem-card-text" style="font-size:14px;">
+        LinkedIn has sued companies for scraping their graph (hiQ Labs case went all the way to the Supreme Court). Use their official API only — it's restricted but legal. Never scrape. The OAuth import path ("find your LinkedIn connections on DealNexus") is safe and standard practice.
+      </div>
+    </div>
+
+    <div style="margin-top:44px;" class="fade-up">
+      <div class="section-label" style="margin-bottom:16px;">Deal Profiles / Raise Posts</div>
+      <div class="stories-grid" style="grid-template-columns:1fr 1fr;gap:16px;">
+        <div class="story-card re" style="padding:18px;">
+          <div class="kicker" style="margin-bottom:10px;">Deal card</div>
+          <div style="background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;font-family:var(--mono);font-size:12px;line-height:1.7;color:rgba(244,246,250,0.82);">
+            🏠 Fix &amp; Flip — Philadelphia, PA<br>
+            Seeking: $350K hard money · 45-day close<br>
+            ARV: $620K · Rehab: $95K · 12 flips completed<br>
+            ROI history: 28% avg · 0 defaults<br>
+            [Share via DealNexus link] [Request Intro to Lenders]
+          </div>
+        </div>
+        <div class="story-card startup" style="padding:18px;">
+          <div class="kicker" style="margin-bottom:10px;">Raise post</div>
+          <div style="background:rgba(0,0,0,0.28);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:14px;font-family:var(--mono);font-size:12px;line-height:1.7;color:rgba(244,246,250,0.82);">
+            🚀 Series A Raise — SaaS / FinTech<br>
+            Seeking: $2M · $800K committed<br>
+            Traction: $180K ARR · 3x YoY · 14 months runway<br>
+            Lead investor: Open · Co-investors: 2 committed<br>
+            [Share via DealNexus link] [Request Warm Intro to Angels]
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
      ROI
 ═══════════════════════════════════════════════ -->
 <section class="roi-section" id="roi">
@@ -904,7 +1027,7 @@ footer{
     <span class="section-label">The ROI math</span>
     <h2 class="section-h2 fade-up">The math is <span class="teal">embarrassing.</span></h2>
     <p class="section-sub fade-up fade-up-delay-1">
-      One extra deal per year from a warm intro = $40–60K profit. DealNexus costs $468/year.
+      One extra deal per year from a warm intro = $40–60K profit. DealNexus costs $1,000/year (Partner).
       That's a 85–128× return on investment from a single deal. The ROI from your second deal is infinite.
     </p>
 
@@ -917,7 +1040,7 @@ footer{
         <div class="roi-result teal">$62,000</div>
         <div class="roi-result-sub">average profit from one warm-intro deal</div>
         <div class="roi-math">
-          App cost:  $468 / year<br>
+          App cost:  $1,000 / year<br>
           Deal profit: $62,000<br>
           ROI:  132× on first deal<br>
           ───────────────────<br>
@@ -932,7 +1055,7 @@ footer{
         <div class="roi-result purple">$500K</div>
         <div class="roi-result-sub">seed round closed via 2-hop warm path</div>
         <div class="roi-math">
-          App cost:  $468 / year<br>
+          App cost:  $1,000 / year<br>
           Round size: $500,000<br>
           ROI:  1,068× on first close<br>
           ───────────────────<br>
@@ -947,7 +1070,7 @@ footer{
         <div class="roi-result gold">$18K / mo</div>
         <div class="roi-result-sub">new MRR added from 2 warm-intro retainers</div>
         <div class="roi-math">
-          App cost:  $468 / year<br>
+          App cost:  $1,000 / year<br>
           New retainers: $18K MRR<br>
           Year 1 value: $216,000<br>
           ───────────────────<br>
@@ -979,41 +1102,38 @@ footer{
 
     <div class="price-cards">
       <div class="price-card">
-        <div class="price-name">Dealmaker</div>
-        <div><span class="price-amount">$39</span><span class="price-period">/month</span></div>
+        <div class="price-name">Observer</div>
+        <div><span class="price-amount">$0</span><span class="price-period">forever free</span></div>
         <ul class="price-features">
-          <li>Full 3-degree trust graph</li>
-          <li>20 warm intro requests/month</li>
-          <li>AI message drafting</li>
-          <li>Push-notification intro flow</li>
-          <li>Intent signal feed</li>
-          <li>Deal map — RE, Startup, Business</li>
-        </ul>
-      </div>
-      <div class="price-card featured">
-        <div class="price-badge">Most popular</div>
-        <div class="price-name">Power Dealer</div>
-        <div><span class="price-amount">$79</span><span class="price-period">/month</span></div>
-        <ul class="price-features">
-          <li>Everything in Dealmaker</li>
-          <li>Unlimited intro requests</li>
-          <li>Priority signal routing</li>
-          <li>Network power analytics</li>
-          <li>Connection net-worth estimates</li>
-          <li>White-glove intro drafting</li>
-          <li>Early access to new deal types</li>
+          <li>Build profile + import contacts</li>
+          <li>See your network map</li>
+          <li>2 intro requests / month</li>
+          <li>No search AI</li>
+          <li style="margin-top:10px;color:var(--muted);">Growth engine — no paywall barrier to join</li>
         </ul>
       </div>
       <div class="price-card">
-        <div class="price-name">Team / Fund</div>
-        <div><span class="price-amount">$249</span><span class="price-period">/month</span></div>
+        <div class="price-name">Member</div>
+        <div><span class="price-amount">$500</span><span class="price-period">/year</span></div>
         <ul class="price-features">
-          <li>Up to 5 team members</li>
-          <li>Shared network graph</li>
-          <li>Team signal dashboard</li>
-          <li>CRM export (Salesforce, HubSpot)</li>
-          <li>Dedicated onboarding</li>
-          <li>Custom deal verticals</li>
+          <li>Unlimited AI natural language search</li>
+          <li>10 intro requests / month</li>
+          <li>Trust path visualisation</li>
+          <li>Basic reputation score</li>
+          <li style="margin-top:10px;color:var(--muted);">For active deal-makers doing 3–8 deals/year</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Recommended</div>
+        <div class="price-name">Partner</div>
+        <div><span class="price-amount">$1,000</span><span class="price-period">/year</span></div>
+        <ul class="price-features">
+          <li>Unlimited everything</li>
+          <li>Priority intro routing</li>
+          <li>Network gap detection</li>
+          <li>Deal outcome tracking + analytics</li>
+          <li>Verified profile badge</li>
+          <li style="margin-top:10px;color:var(--muted);">Power users + lenders + angels</li>
         </ul>
       </div>
     </div>
