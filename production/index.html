@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>DealNexus — The Warm Intro Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/aurum-design-system.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --navy:#050913;
+  --navy2:#091121;
+  --navy3:#101b2e;
+  --navy4:#1a2a42;
+  --teal:#00C9B1;
+  --teal2:#00a896;
+  --gold:#F0B429;
+  --purple:#8B5CF6;
+  --coral:#FF6B6B;
+  --white:#F4F6FA;
+  --muted:rgba(244,246,250,0.5);
+  --muted2:rgba(244,246,250,0.25);
+  --border:rgba(255,255,255,0.07);
+  --serif:'Instrument Serif',serif;
+  --sans:'Sora',sans-serif;
+  --mono:'DM Mono',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:var(--sans);overflow-x:hidden;}
+
+/* ─── UTILITIES ─── */
+.teal{color:var(--teal);}
+.gold{color:var(--gold);}
+.purple{color:var(--purple);}
+.muted{color:var(--muted);}
+.mono{font-family:var(--mono);}
+.serif{font-family:var(--serif);}
+
+/* ─── GRAIN OVERLAY ─── */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:1000;opacity:0.35;
+}
+
+/* ─── NAV ─── */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:900;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 48px;
+  background:rgba(6,11,20,0.85);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+}
+.nav-logo{font-family:var(--sans);font-size:15px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--teal);}
+.nav-links{display:flex;gap:32px;align-items:center;}
+.nav-links a{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.5px;transition:color 0.2s;}
+.nav-links a:hover{color:var(--white);}
+.nav-links a.nav-feature{
+  color:var(--gold);
+  background:rgba(255,255,255,0.02);
+  border:1px solid rgba(201,168,76,0.35);
+  border-radius:999px;
+  padding:5px 10px;
+  font-weight:700;
+  font-family:'Syne',sans-serif;
+  font-size:12px;
+  letter-spacing:0.01em;
+  line-height:1.1;
+}
+.nav-links a.nav-feature:hover{
+  color:var(--gold-bright);
+  border-color:rgba(201,168,76,0.6);
+  background:rgba(201,168,76,0.1);
+}
+.nav-cta{background:var(--teal);color:var(--navy);padding:9px 22px;border-radius:8px;font-size:12px;font-weight:700;text-decoration:none;letter-spacing:0.5px;transition:all 0.2s;}
+.nav-cta:hover{background:#00e5c9;transform:translateY(-1px);}
+
+/* ─── HERO ─── */
+.hero{
+  min-height:100vh;display:flex;align-items:center;
+  padding:120px 48px 80px;
+  position:relative;overflow:hidden;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 20% 50%, rgba(0,201,177,0.06) 0%, transparent 70%),
+             radial-gradient(ellipse 60% 80% at 80% 20%, rgba(139,92,246,0.04) 0%, transparent 60%),
+             radial-gradient(ellipse 40% 40% at 60% 80%, rgba(240,180,41,0.03) 0%, transparent 50%);
+  animation:hero-drift 14s ease-in-out infinite alternate;
+}
+@keyframes hero-drift{
+  from{transform:translate3d(0,0,0) scale(1);}
+  to{transform:translate3d(-18px,10px,0) scale(1.04);}
+}
+.hero-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;
+  max-width:1280px;margin:0 auto;width:100%;position:relative;z-index:2;
+}
+.hero-label{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(0,201,177,0.08);border:1px solid rgba(0,201,177,0.25);
+  border-radius:20px;padding:6px 16px;margin-bottom:28px;
+  font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;text-transform:uppercase;
+}
+.hero-label-dot{width:6px;height:6px;border-radius:50%;background:var(--teal);animation:pulse-dot 2s infinite;}
+@keyframes pulse-dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.5;transform:scale(0.7)}}
+
+.hero-h1{
+  font-family:var(--sans);font-size:clamp(42px,5vw,68px);
+  font-weight:700;line-height:1.05;letter-spacing:-1.2px;margin-bottom:24px;
+}
+.hero-h1 em{color:var(--teal);font-style:italic;font-family:var(--serif);}
+.hero-sub{
+  font-size:17px;color:var(--muted);line-height:1.75;
+  max-width:520px;margin-bottom:40px;
+}
+.hero-sub strong{color:var(--white);font-weight:600;}
+.hero-one-line{
+  margin-top:-22px;margin-bottom:26px;
+  font-size:13px;color:rgba(244,246,250,0.82);letter-spacing:0.1px;
+}
+.hero-one-line b{color:var(--teal);}
+.hero-actions{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin-bottom:48px;}
+.btn-primary{
+  background:var(--teal);color:var(--navy);
+  padding:15px 32px;border-radius:10px;
+  font-size:14px;font-weight:700;text-decoration:none;letter-spacing:0.3px;
+  transition:all 0.25s;display:inline-block;
+  box-shadow:0 10px 26px rgba(0,201,177,0.24);
+}
+.btn-primary:hover{background:#00e5c9;transform:translateY(-2px);box-shadow:0 14px 30px rgba(0,201,177,0.34);}
+.btn-ghost{
+  border:1px solid rgba(255,255,255,0.2);color:var(--white);
+  padding:14px 28px;border-radius:10px;
+  font-size:14px;font-weight:500;text-decoration:none;
+  transition:all 0.25s;display:inline-block;
+}
+.btn-ghost:hover{border-color:rgba(255,255,255,0.5);background:rgba(255,255,255,0.04);}
+
+.hero-stats{display:flex;gap:32px;flex-wrap:wrap;}
+.hero-stat .num{font-size:28px;font-weight:700;color:var(--white);font-family:var(--mono);}
+.hero-stat .lbl{font-size:11px;color:var(--muted);margin-top:2px;letter-spacing:0.3px;}
+.hero-fit{
+  margin-top:16px;display:flex;gap:8px;flex-wrap:wrap;
+}
+.hero-fit-pill{
+  padding:6px 10px;border-radius:999px;border:1px solid var(--border);
+  font-size:10px;font-weight:600;letter-spacing:0.5px;text-transform:uppercase;
+  color:var(--muted);
+}
+
+/* Phone mockup */
+.phone-wrap{display:flex;justify-content:center;align-items:center;position:relative;}
+.hero-device-stack{position:relative;display:flex;align-items:center;justify-content:center;gap:18px;}
+.phone-glow{
+  position:absolute;width:320px;height:320px;border-radius:50%;
+  background:radial-gradient(circle, rgba(0,201,177,0.15) 0%, transparent 70%);
+  top:50%;left:50%;transform:translate(-50%,-50%);
+  animation:glow-pulse 4s ease-in-out infinite;
+}
+@keyframes glow-pulse{0%,100%{opacity:0.6;transform:translate(-50%,-50%) scale(1)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.1)}}
+.phone{
+  width:300px;height:620px;background:var(--navy2);border-radius:40px;
+  border:1.5px solid rgba(255,255,255,0.12);overflow:hidden;
+  position:relative;z-index:2;
+  box-shadow:0 40px 80px rgba(0,0,0,0.8),0 0 0 1px rgba(255,255,255,0.05);
+  animation:device-float 5s ease-in-out infinite;
+}
+@keyframes device-float{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.phone-notch{
+  position:absolute;top:0;left:50%;transform:translateX(-50%);
+  width:90px;height:26px;background:var(--navy2);
+  border-radius:0 0 12px 12px;z-index:10;
+}
+.phone-screen{padding:36px 20px 16px;height:100%;overflow:hidden;}
+
+/* Phone screen content */
+.p-status{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.p-time{font-size:12px;font-weight:700;color:var(--white);}
+.p-search{
+  background:rgba(255,255,255,0.07);border:1px solid var(--teal);
+  border-radius:12px;padding:12px 14px;margin-bottom:14px;
+}
+.p-search-text{font-size:12px;color:var(--white);line-height:1.5;}
+.cursor{display:inline-block;width:2px;height:13px;background:var(--teal);margin-left:1px;animation:blink 1s infinite;vertical-align:middle;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.p-ai-badge{
+  display:inline-flex;align-items:center;gap:4px;margin-top:6px;
+  background:rgba(0,201,177,0.1);border-radius:6px;padding:2px 7px;
+  font-size:9px;color:var(--teal);font-weight:700;
+}
+.p-result{
+  background:rgba(255,255,255,0.05);border:1px solid rgba(0,201,177,0.35);
+  border-radius:12px;padding:12px;margin-bottom:8px;
+  animation:slideUp 0.4s ease both;
+}
+.p-result:nth-child(2){animation-delay:0.1s;border-color:rgba(255,255,255,0.07);}
+.p-result:nth-child(3){animation-delay:0.2s;border-color:rgba(255,255,255,0.07);}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.p-result-top{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.p-av{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;}
+.p-rname{font-size:11px;font-weight:700;color:var(--white);}
+.p-rsub{font-size:9px;color:var(--muted);}
+.p-match{margin-left:auto;font-size:10px;font-weight:700;color:var(--teal);background:rgba(0,201,177,0.1);padding:2px 7px;border-radius:6px;}
+.p-path{display:flex;align-items:center;gap:3px;}
+.p-pnode{display:flex;flex-direction:column;align-items:center;}
+.p-pav{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:7px;font-weight:700;}
+.p-pname{font-size:6.5px;color:var(--muted);margin-top:1px;}
+.p-parr{color:var(--teal);font-size:9px;margin-bottom:8px;}
+.p-intro-btn{
+  width:100%;background:var(--teal);color:var(--navy);
+  border:none;border-radius:9px;padding:10px;
+  font-size:11px;font-weight:700;cursor:pointer;margin-top:8px;
+  font-family:var(--sans);
+}
+.p-label{font-size:9px;color:var(--muted);letter-spacing:0.8px;text-transform:uppercase;margin-bottom:8px;}
+
+/* Side intro panel in hero */
+.intro-side{
+  width:176px;background:var(--navy3);border:1px solid var(--border);
+  border-radius:16px;padding:12px;box-shadow:0 20px 40px rgba(0,0,0,0.45);
+  align-self:flex-end;margin-bottom:26px;opacity:0;transform:translateY(8px);
+  animation:panelIn 0.7s ease 1.2s forwards;
+}
+@keyframes panelIn{to{opacity:1;transform:translateY(0)}}
+.intro-side-label{
+  font-size:8px;letter-spacing:1px;text-transform:uppercase;
+  color:var(--teal);font-weight:700;margin-bottom:8px;
+}
+.intro-side-head{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.intro-side-av{
+  width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:9px;font-weight:700;background:rgba(0,201,177,0.14);border:1px solid rgba(0,201,177,0.4);color:var(--teal);
+}
+.intro-side-name{font-size:10px;color:var(--white);font-weight:700;}
+.intro-side-sub{font-size:8px;color:var(--muted);}
+.intro-path{display:flex;align-items:center;gap:4px;margin-bottom:10px;}
+.intro-pill{
+  width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:8px;font-weight:700;
+}
+.intro-arrow{font-size:10px;color:var(--teal);}
+.intro-meta{
+  background:rgba(0,201,177,0.08);border:1px solid rgba(0,201,177,0.2);
+  border-radius:9px;padding:7px;margin-bottom:8px;
+}
+.intro-meta-row{display:flex;justify-content:space-between;font-size:8px;color:var(--muted);line-height:1.6;}
+.intro-status{
+  width:100%;border:1px solid rgba(0,201,177,0.35);background:rgba(0,201,177,0.14);
+  color:var(--teal);border-radius:8px;padding:7px 8px;
+  font-size:9px;font-weight:700;text-align:center;
+}
+
+/* ─── SECTION LAYOUT ─── */
+section{padding:100px 48px;position:relative;}
+.section-inner{max-width:1280px;margin:0 auto;}
+.section-label{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:11px;font-weight:600;color:var(--teal);
+  letter-spacing:1.5px;text-transform:uppercase;margin-bottom:20px;
+}
+.section-label::before{content:'';width:24px;height:1px;background:var(--teal);}
+.section-h2{
+  font-family:var(--sans);font-size:clamp(36px,4vw,54px);
+  line-height:1.07;letter-spacing:-1px;margin-bottom:20px;
+  font-weight:700;
+}
+.section-sub{font-size:16px;color:var(--muted);line-height:1.8;max-width:600px;margin-bottom:60px;}
+
+/* ─── THE PROBLEM ─── */
+.problem-section{background:var(--navy);}
+.problem-grid{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:start;}
+.problem-quote{
+  font-family:var(--serif);font-size:28px;line-height:1.5;
+  color:var(--white);border-left:3px solid var(--teal);
+  padding-left:28px;margin-bottom:32px;
+  font-style:italic;
+}
+.problem-cards{display:flex;flex-direction:column;gap:16px;}
+.problem-card{
+  background:var(--navy3);border:1px solid var(--border);
+  border-radius:16px;padding:24px;
+  transition:border-color 0.3s,transform 0.3s;
+  cursor:default;
+}
+.problem-card:hover{border-color:rgba(255,107,107,0.4);transform:translateX(4px);}
+.problem-card-head{display:flex;align-items:center;gap:12px;margin-bottom:10px;}
+.problem-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0;}
+.problem-card-title{font-size:14px;font-weight:700;color:var(--white);}
+.problem-card-text{font-size:13px;color:var(--muted);line-height:1.7;}
+
+/* ─── THE WOW MOMENT (DEMO) ─── */
+.wow-section{background:linear-gradient(180deg, var(--navy) 0%, var(--navy3) 100%);}
+.wow-flow{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:0;
+  position:relative;margin-bottom:60px;
+}
+.wow-flow::before{
+  content:'';position:absolute;top:28px;left:12%;right:12%;height:1px;
+  background:linear-gradient(90deg, transparent, var(--teal), var(--gold), var(--teal), transparent);
+  z-index:0;
+}
+.wow-step{position:relative;z-index:1;text-align:center;padding:0 16px;}
+.wow-num{
+  width:56px;height:56px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;font-weight:700;margin:0 auto 16px;
+  font-family:var(--mono);border:1.5px solid;
+  transition:all 0.3s;
+}
+.wow-step:nth-child(1) .wow-num{background:rgba(0,201,177,0.12);border-color:rgba(0,201,177,0.5);color:var(--teal);}
+.wow-step:nth-child(2) .wow-num{background:rgba(139,92,246,0.12);border-color:rgba(139,92,246,0.5);color:var(--purple);}
+.wow-step:nth-child(3) .wow-num{background:rgba(240,180,41,0.12);border-color:rgba(240,180,41,0.5);color:var(--gold);}
+.wow-step:nth-child(4) .wow-num{background:rgba(0,201,177,0.2);border-color:var(--teal);color:var(--teal);}
+.wow-step-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:8px;}
+.wow-step-sub{font-size:12px;color:var(--muted);line-height:1.6;}
+
+/* Real example stories */
+.stories-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px;}
+.story-card{
+  background:var(--navy2);border:1px solid var(--border);border-radius:20px;
+  padding:28px;transition:all 0.3s;position:relative;overflow:hidden;
+}
+.story-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+}
+.story-card.re::before{background:linear-gradient(90deg,var(--teal),rgba(0,201,177,0.2));}
+.story-card.startup::before{background:linear-gradient(90deg,var(--purple),rgba(139,92,246,0.2));}
+.story-card.b2b::before{background:linear-gradient(90deg,var(--gold),rgba(240,180,41,0.2));}
+.story-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.15);}
+.story-persona{
+  display:flex;align-items:center;gap:12px;margin-bottom:20px;
+}
+.story-av{
+  width:44px;height:44px;border-radius:50%;display:flex;align-items:center;
+  justify-content:center;font-size:14px;font-weight:700;flex-shrink:0;
+}
+.story-persona-name{font-size:14px;font-weight:700;color:var(--white);}
+.story-persona-role{font-size:11px;color:var(--muted);}
+.story-before{
+  background:rgba(255,107,107,0.07);border:1px solid rgba(255,107,107,0.2);
+  border-radius:10px;padding:14px;margin-bottom:12px;
+}
+.story-after{
+  background:rgba(0,201,177,0.07);border:1px solid rgba(0,201,177,0.2);
+  border-radius:10px;padding:14px;margin-bottom:16px;
+}
+.story-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;}
+.story-label.red{color:rgba(255,107,107,0.8);}
+.story-label.green{color:var(--teal);}
+.story-text{font-size:12px;line-height:1.65;}
+.story-text.red-t{color:rgba(255,107,107,0.85);}
+.story-text.green-t{color:rgba(244,246,250,0.75);}
+.story-roi{
+  display:flex;justify-content:space-between;align-items:center;
+  background:rgba(240,180,41,0.07);border-radius:8px;padding:10px 14px;
+}
+.story-roi-label{font-size:10px;color:var(--muted);}
+.story-roi-val{font-size:14px;font-weight:700;color:var(--gold);}
+
+/* ─── THE MOAT ─── */
+.moat-section{background:var(--navy2);}
+.moat-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:80px;align-items:center;}
+.moat-points{display:flex;flex-direction:column;gap:20px;}
+.moat-point{
+  display:flex;gap:16px;align-items:flex-start;
+  padding:20px;border-radius:14px;border:1px solid var(--border);
+  background:var(--navy3);transition:all 0.3s;
+}
+.moat-point:hover{border-color:rgba(0,201,177,0.3);background:rgba(0,201,177,0.03);}
+.moat-icon{width:40px;height:40px;border-radius:10px;background:rgba(0,201,177,0.1);border:1px solid rgba(0,201,177,0.2);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+.moat-title{font-size:14px;font-weight:700;color:var(--white);margin-bottom:5px;}
+.moat-text{font-size:13px;color:var(--muted);line-height:1.65;}
+
+/* Vs LinkedIn box */
+.vs-box{
+  background:var(--navy3);border:1px solid var(--border);border-radius:20px;padding:32px;
+}
+.vs-title{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:20px;text-align:center;}
+.vs-row{
+  display:grid;grid-template-columns:1fr auto 1fr;gap:12px;align-items:center;
+  padding:10px 0;border-bottom:1px solid var(--border);
+}
+.vs-row:last-child{border-bottom:none;}
+.vs-wp{font-size:12px;font-weight:600;color:var(--teal);text-align:left;}
+.vs-li{font-size:12px;color:rgba(255,255,255,0.3);text-align:right;}
+.vs-metric{font-size:9px;font-weight:600;color:var(--muted);letter-spacing:0.5px;text-align:center;text-transform:uppercase;}
+
+/* ─── ROI SECTION ─── */
+.roi-section{background:var(--navy);}
+.roi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:60px;}
+.roi-card{
+  border-radius:20px;padding:32px;border:1px solid var(--border);
+  text-align:center;transition:all 0.3s;
+}
+.roi-card:hover{transform:translateY(-4px);}
+.roi-card.re{background:linear-gradient(145deg,rgba(0,201,177,0.08),var(--navy3));}
+.roi-card.flip{background:linear-gradient(145deg,rgba(139,92,246,0.08),var(--navy3));}
+.roi-card.b2b{background:linear-gradient(145deg,rgba(240,180,41,0.08),var(--navy3));}
+.roi-emoji{font-size:32px;margin-bottom:16px;display:block;}
+.roi-persona{font-size:13px;font-weight:700;color:var(--white);margin-bottom:6px;}
+.roi-pain{font-size:12px;color:var(--muted);margin-bottom:20px;line-height:1.6;font-style:italic;}
+.roi-divider{height:1px;background:var(--border);margin-bottom:20px;}
+.roi-result{font-size:24px;font-weight:700;margin-bottom:4px;}
+.roi-result-sub{font-size:11px;color:var(--muted);}
+.roi-math{
+  margin-top:20px;background:rgba(0,0,0,0.3);border-radius:10px;
+  padding:12px;font-family:var(--mono);font-size:11px;color:var(--muted);
+  text-align:left;line-height:1.8;
+}
+
+/* ─── PRICING / CTA ─── */
+.cta-section{
+  background:linear-gradient(180deg,var(--navy3),var(--navy2));
+  text-align:center;padding:120px 48px;
+}
+.cta-eyebrow{
+  font-size:11px;font-weight:600;color:var(--teal);letter-spacing:2px;
+  text-transform:uppercase;margin-bottom:20px;
+}
+.cta-h2{
+  font-family:var(--sans);font-size:clamp(40px,5vw,64px);
+  line-height:1.08;margin-bottom:24px;font-weight:700;letter-spacing:-1px;
+}
+.cta-sub{font-size:17px;color:var(--muted);max-width:560px;margin:0 auto 48px;line-height:1.75;}
+.price-cards{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+.price-card{
+  background:var(--navy3);border:1px solid var(--border);border-radius:20px;
+  padding:32px 28px;min-width:260px;text-align:left;position:relative;
+  transition:transform 0.25s,border-color 0.25s,background 0.25s;
+}
+.price-card.featured{border-color:var(--teal);background:rgba(0,201,177,0.04);}
+.price-card:hover{transform:translateY(-4px);border-color:rgba(255,255,255,0.22);}
+.price-badge{
+  position:absolute;top:-12px;left:50%;transform:translateX(-50%);
+  background:var(--teal);color:var(--navy);font-size:10px;font-weight:700;
+  padding:4px 16px;border-radius:20px;white-space:nowrap;
+}
+.price-name{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:12px;}
+.price-amount{font-size:38px;font-weight:700;color:var(--white);font-family:var(--mono);}
+.price-period{font-size:13px;color:var(--muted);}
+.price-features{list-style:none;margin-top:24px;display:flex;flex-direction:column;gap:10px;}
+.price-features li{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:8px;}
+.price-features li::before{content:'✓';color:var(--teal);font-weight:700;font-size:12px;}
+
+/* ─── FOOTER ─── */
+footer{
+  border-top:1px solid var(--border);padding:40px 48px;
+  display:flex;justify-content:space-between;align-items:center;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-logo{font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--teal);}
+.footer-text{font-size:12px;color:var(--muted);}
+
+/* ─── ANIMATIONS ─── */
+.fade-up{opacity:0;transform:translateY(30px);transition:opacity 0.7s ease,transform 0.7s ease;}
+.fade-up.visible{opacity:1;transform:translateY(0);}
+.fade-up-delay-1{transition-delay:0.1s;}
+.fade-up-delay-2{transition-delay:0.2s;}
+.fade-up-delay-3{transition-delay:0.3s;}
+
+/* Typewriter */
+#typewriter{display:inline;}
+.tw-cursor{display:inline-block;width:2px;height:14px;background:var(--teal);animation:blink 1s infinite;vertical-align:middle;margin-left:1px;}
+
+/* ripple signals on hero phone map */
+@keyframes map-ripple{0%{r:6;opacity:0.8}100%{r:22;opacity:0}}
+@keyframes map-ripple2{0%{r:6;opacity:0.5}100%{r:30;opacity:0}}
+.mr1{animation:map-ripple 2.2s ease-out infinite;}
+.mr2{animation:map-ripple2 2.2s ease-out 0.5s infinite;}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  nav{padding:16px 24px;}
+  .hero{padding:100px 24px 60px;}
+  .hero-grid{grid-template-columns:1fr;gap:60px;}
+  .phone-wrap{order:-1;}
+  .hero-device-stack{display:block;}
+  .intro-side{display:none;}
+  section{padding:80px 24px;}
+  .problem-grid,.moat-grid{grid-template-columns:1fr;}
+  .wow-flow{grid-template-columns:1fr 1fr;row-gap:40px;}
+  .wow-flow::before{display:none;}
+  .stories-grid,.roi-grid{grid-template-columns:1fr;}
+  footer{flex-direction:column;text-align:center;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">DealNexus</span>
+  <div class="nav-links">
+    <a href="index.html" class="nav-feature">Home</a>
+    <a href="#problem">The Problem</a>
+    <a href="#how">How It Works</a>
+    <a href="#moat">The Moat</a>
+    <a href="#roi">ROI</a>
+    <a href="demand-signals.html" class="nav-feature">Demand Signals</a>
+    <a href="executive-pitch.html" class="nav-feature">Executive Pitch</a>
+    <a href="mockups/dealnexus-product-mockup.html" class="nav-feature">Product Mockup</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#pricing" class="nav-cta">Request Access</a>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid">
+    <div>
+      <div class="hero-label">
+        <span class="hero-label-dot"></span>
+        Invite-only · Private beta
+      </div>
+      <h1 class="hero-h1">
+        The warm intro<br>
+        already exists<br>
+        in your network.<br>
+        <em>We just find it.</em>
+      </h1>
+      <p class="hero-sub">
+        You type what you need. DealNexus finds who in your network can introduce you,
+        <strong>writes the message</strong>, sends it to the right person, and gets you
+        introduced — without you having to think, remember, or ask awkwardly.
+      </p>
+      <p class="hero-one-line"><b>LinkedIn lets you find people.</b> DealNexus gets you introduced through people who trust you both.</p>
+      <div class="hero-actions">
+        <a href="#pricing" class="btn-primary">Get early access →</a>
+        <a href="#how" class="btn-ghost">See how it works</a>
+        <a href="demand-signals.html" class="btn-ghost">Open demand signals</a>
+        <a href="executive-pitch.html" class="btn-ghost">Open executive pitch</a>
+        <a href="mockups/dealnexus-product-mockup.html" class="btn-ghost">Open product mockup</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <div class="num teal">13×</div>
+          <div class="lbl">warm vs. cold conversion</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num" style="color:var(--gold);">$40–60K</div>
+          <div class="lbl">avg. profit from one extra deal</div>
+        </div>
+        <div class="hero-stat">
+          <div class="num">$468</div>
+          <div class="lbl">annual cost — full access</div>
+        </div>
+      </div>
+      <div class="hero-fit">
+        <span class="hero-fit-pill">House Flippers</span>
+        <span class="hero-fit-pill">Private Lenders</span>
+        <span class="hero-fit-pill">B2B Service Firms</span>
+      </div>
+    </div>
+
+    <!-- HERO PHONE -->
+    <div class="phone-wrap">
+      <div class="hero-device-stack">
+        <div class="phone-glow"></div>
+        <div class="phone">
+          <div class="phone-notch"></div>
+          <div class="phone-screen">
+          <div class="p-status">
+            <span class="p-time">9:41</span>
+            <span style="font-size:10px;color:var(--muted);">●●● ▪</span>
+          </div>
+          <div class="p-label">What do you need?</div>
+          <div class="p-search">
+            <div class="p-search-text" id="typewriter"></div><span class="tw-cursor"></span>
+            <div style="margin-top:8px;"><span class="p-ai-badge">✦ AI</span><span style="font-size:9px;color:var(--muted);margin-left:6px;">Trust-path aware · 3-degree graph</span></div>
+          </div>
+          <div class="p-label" id="results-label" style="opacity:0;transition:opacity 0.4s;">3 warm paths found</div>
+          <div id="result-1" class="p-result" style="opacity:0;transition:opacity 0.4s 0.1s,transform 0.4s 0.1s;transform:translateY(8px);">
+            <div class="p-result-top">
+              <div class="p-av" style="background:rgba(0,201,177,0.15);border:1px solid rgba(0,201,177,0.4);color:var(--teal);">DV</div>
+              <div>
+                <div class="p-rname">Dave Vargas</div>
+                <div class="p-rsub">Private lender · Providence · $150–500K</div>
+              </div>
+              <span class="p-match">97%</span>
+            </div>
+            <div class="p-path">
+              <div class="p-pnode"><div class="p-pav" style="background:rgba(0,201,177,0.2);border:1px solid var(--teal);color:var(--teal);">You</div><div class="p-pname">Marcus</div></div>
+              <div class="p-parr">→</div>
+              <div class="p-pnode"><div class="p-pav" style="background:rgba(240,180,41,0.1);border:1px solid rgba(240,180,41,0.3);color:var(--gold);">MK</div><div class="p-pname">Mike K</div></div>
+              <div class="p-parr">→</div>
+              <div class="p-pnode"><div class="p-pav" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.15);color:var(--white);">DV</div><div class="p-pname">Dave V</div></div>
+              <span style="margin-left:auto;font-size:8px;color:var(--teal);">2 hops</span>
+            </div>
+            <button class="p-intro-btn">Request warm intro via Mike →</button>
+          </div>
+          <div id="result-2" class="p-result" style="opacity:0;transition:opacity 0.4s 0.2s,transform 0.4s 0.2s;transform:translateY(8px);">
+            <div class="p-result-top">
+              <div class="p-av" style="background:rgba(139,92,246,0.12);border:1px solid rgba(139,92,246,0.3);color:var(--purple);">KO</div>
+              <div>
+                <div class="p-rname">Kim Ochoa</div>
+                <div class="p-rsub">Hard money lender · Warwick RI</div>
+              </div>
+              <span class="p-match" style="background:rgba(139,92,246,0.12);color:var(--purple);">88%</span>
+            </div>
+          </div>
+        </div>
+        </div>
+        <div class="intro-side">
+          <div class="intro-side-label">Intro inbox</div>
+          <div class="intro-side-head">
+            <div class="intro-side-av">MR</div>
+            <div>
+              <div class="intro-side-name">Marcus → Dave</div>
+              <div class="intro-side-sub">via Mike K · 2 hops</div>
+            </div>
+          </div>
+          <div class="intro-path">
+            <div class="intro-pill" style="background:rgba(0,201,177,0.18);border:1px solid rgba(0,201,177,0.45);color:var(--teal);">MR</div>
+            <span class="intro-arrow">→</span>
+            <div class="intro-pill" style="background:rgba(240,180,41,0.12);border:1px solid rgba(240,180,41,0.35);color:var(--gold);">MK</div>
+            <span class="intro-arrow">→</span>
+            <div class="intro-pill" style="background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.18);color:var(--white);">DV</div>
+          </div>
+          <div class="intro-meta">
+            <div class="intro-meta-row"><span>Deal</span><span>$185K flip</span></div>
+            <div class="intro-meta-row"><span>Timeline</span><span>30 days</span></div>
+            <div class="intro-meta-row"><span>Trust</span><span style="color:var(--teal);">94%</span></div>
+          </div>
+          <button class="intro-status" id="intro-status-btn">Approve intro ✓</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     THE PROBLEM
+═══════════════════════════════════════════════ -->
+<section class="problem-section" id="problem">
+  <div class="section-inner">
+    <span class="section-label">The problem</span>
+    <div class="problem-grid">
+      <div>
+        <h2 class="section-h2 fade-up">
+          LinkedIn built the graph.<br>
+          <span class="teal">Then left you stranded</span><br>
+          at the last mile.
+        </h2>
+        <p class="section-sub fade-up fade-up-delay-1">
+          $2 billion/year in Sales Navigator revenue proves people will pay to <em>find</em> connections.
+          But LinkedIn refuses to automate the actual introduction — because doing so would expose
+          that their core product is broken. The last mile — finding, asking, routing, and closing
+          the intro — is still 100% manual.
+        </p>
+        <div class="problem-quote fade-up fade-up-delay-2">
+          "I have $2M sitting idle because I can't find qualified borrowers fast enough."
+          <br><br>
+          "I lost the deal because my usual lender went quiet and I had no backup."
+          <br><br>
+          "80% of our revenue comes from referrals but we have zero system for generating them."
+        </div>
+      </div>
+      <div class="problem-cards fade-up fade-up-delay-1">
+        <div class="problem-card">
+          <div class="problem-card-head">
+            <div class="problem-icon" style="background:rgba(255,107,107,0.1);">🧠</div>
+            <span class="problem-card-title">Dependent on memory</span>
+          </div>
+          <p class="problem-card-text">You have to <em>remember</em> that Mike knows Dave. That Sara is connected to the VC you need. That Tom's cousin runs a title company in Austin. Nobody's brain can hold a 142-person network reliably.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-head">
+            <div class="problem-icon" style="background:rgba(255,107,107,0.1);">😬</div>
+            <span class="problem-card-title">Requires social courage</span>
+          </div>
+          <p class="problem-card-text">Asking for an intro is a social debt transaction. You have to estimate if you're burning capital with Mike, draft something that doesn't make you sound desperate, and time it right. Most people don't ask. Deals die.</p>
+        </div>
+        <div class="problem-card">
+          <div class="problem-card-head">
+            <div class="problem-icon" style="background:rgba(255,107,107,0.1);">🐌</div>
+            <span class="problem-card-title">Slow by default</span>
+          </div>
+          <p class="problem-card-text">A warm intro chain takes 3–7 days minimum. You email Mike. Mike says sure. Mike sends a LinkedIn message. Dave is slow to reply. By then, another lender funded the deal. Speed is the game.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     HOW IT WORKS — THE WOW MOMENT
+═══════════════════════════════════════════════ -->
+<section class="wow-section" id="how">
+  <div class="section-inner">
+    <span class="section-label">How it works</span>
+    <h2 class="section-h2 fade-up">From need to intro<br><span class="teal">in minutes, not days</span></h2>
+    <p class="section-sub fade-up fade-up-delay-1">
+      One sentence from you. Four automated steps. Done before you finish your coffee.
+    </p>
+
+    <div class="wow-flow fade-up fade-up-delay-1">
+      <div class="wow-step">
+        <div class="wow-num">01</div>
+        <div class="wow-step-title">You type your need</div>
+        <div class="wow-step-sub">"I need a private lender in Rhode Island, $200K, close in 30 days" — plain English, no forms</div>
+      </div>
+      <div class="wow-step">
+        <div class="wow-num">02</div>
+        <div class="wow-step-title">AI maps the path</div>
+        <div class="wow-step-sub">Graph engine scans your 3-degree trust network, ranks matches by fit, distance, and track record</div>
+      </div>
+      <div class="wow-step">
+        <div class="wow-num">03</div>
+        <div class="wow-step-title">Message is drafted + sent</div>
+        <div class="wow-step-sub">AI writes a contextual request to Mike K. One push notification. Mike taps approve in 3 seconds</div>
+      </div>
+      <div class="wow-step">
+        <div class="wow-num">04</div>
+        <div class="wow-step-title">Dave gets the intro</div>
+        <div class="wow-step-sub">Context-rich introduction with your deal details, track record, and Mike's endorsement — all pre-populated</div>
+      </div>
+    </div>
+
+    <!-- Real example stories -->
+    <h3 style="font-family:var(--serif);font-size:32px;margin-bottom:12px;" class="fade-up">Real scenarios. Real math.</h3>
+    <p style="font-size:15px;color:var(--muted);margin-bottom:36px;" class="fade-up fade-up-delay-1">These aren't hypotheticals. This is the exact problem DealNexus was built to solve.</p>
+
+    <div class="stories-grid">
+      <!-- Story 1 -->
+      <div class="story-card re fade-up">
+        <div class="story-persona">
+          <div class="story-av" style="background:rgba(0,201,177,0.12);color:var(--teal);">JT</div>
+          <div>
+            <div class="story-persona-name">Jake Thornton</div>
+            <div class="story-persona-role">House flipper · Providence, RI · 32 deals</div>
+          </div>
+        </div>
+        <div class="story-before">
+          <div class="story-label red">⬤ Before DealNexus</div>
+          <div class="story-text red-t">Found a 3-bed flip in Cranston — $165K ARV $290K. His usual lender went dark. Spent 4 days cold-calling. Lost the deal to a cash buyer on day 5. The $62K profit walked out the door.</div>
+        </div>
+        <div class="story-after">
+          <div class="story-label green">⬤ With DealNexus</div>
+          <div class="story-text" style="color:rgba(244,246,250,0.8);">Types: "Hard money lender, Cranston RI, $165K, 21 days." DealNexus finds Dave Vargas (2 hops via Mike K). Mike approves the intro in 4 minutes. Jake is on the phone with Dave by 2pm. Deal funded. Deal closed.</div>
+        </div>
+        <div class="story-roi">
+          <span class="story-roi-label">Profit recovered</span>
+          <span class="story-roi-val">+$62,000</span>
+        </div>
+      </div>
+
+      <!-- Story 2 -->
+      <div class="story-card startup fade-up fade-up-delay-1">
+        <div class="story-persona">
+          <div class="story-av" style="background:rgba(139,92,246,0.12);color:var(--purple);">AL</div>
+          <div>
+            <div class="story-persona-name">Ana Li</div>
+            <div class="story-persona-role">PropTech founder · Providence · Seed stage</div>
+          </div>
+        </div>
+        <div class="story-before">
+          <div class="story-label red">⬤ Before DealNexus</div>
+          <div class="story-text red-t">Needed $500K to close her seed round. Sent 40 cold InMails to angels. 3 replies. 1 call. 0 checks. Spent 3 months chasing the wrong people in the wrong order.</div>
+        </div>
+        <div class="story-after">
+          <div class="story-label green">⬤ With DealNexus</div>
+          <div class="story-text" style="color:rgba(244,246,250,0.8);">Types: "Angel investor, PropTech, $50–100K check, RI/MA." DealNexus surfaces Sara Lin (2 hops via Joe R) — 12 angel bets, 3 exits, active in RE tech. Sara leads the round. Round closes in 6 weeks.</div>
+        </div>
+        <div class="story-roi">
+          <span class="story-roi-label">Round closed</span>
+          <span class="story-roi-val">$500K in 6 weeks</span>
+        </div>
+      </div>
+
+      <!-- Story 3 -->
+      <div class="story-card b2b fade-up fade-up-delay-2">
+        <div class="story-persona">
+          <div class="story-av" style="background:rgba(240,180,41,0.12);color:var(--gold);">RC</div>
+          <div>
+            <div class="story-persona-name">Rodriguez Capital</div>
+            <div class="story-persona-role">B2B advisory firm · 8 person team · Boston</div>
+          </div>
+        </div>
+        <div class="story-before">
+          <div class="story-label red">⬤ Before DealNexus</div>
+          <div class="story-text red-t">80% of revenue from referrals, zero system for generating them. Partner would occasionally "remember" to ask someone. New client acquisition was entirely random. Two slow quarters nearly broke the firm.</div>
+        </div>
+        <div class="story-after">
+          <div class="story-label green">⬤ With DealNexus</div>
+          <div class="story-text" style="color:rgba(244,246,250,0.8);">Every Monday: DealNexus surfaces 3–5 signals — new roles, funding announcements, business acquisitions in their 3-degree graph. Partner reviews, approves intros. Pipeline is now predictable. Two new retainers from warm intros in month one.</div>
+        </div>
+        <div class="story-roi">
+          <span class="story-roi-label">New retainers / month 1</span>
+          <span class="story-roi-val">+$18,000 MRR</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     THE MOAT
+═══════════════════════════════════════════════ -->
+<section class="moat-section" id="moat">
+  <div class="section-inner">
+    <span class="section-label">Competitive moat</span>
+    <div class="moat-grid">
+      <div>
+        <h2 class="section-h2 fade-up">The graph is the moat.<br><span class="teal">You cannot buy it.</span><br>You cannot copy it.</h2>
+        <p class="section-sub fade-up fade-up-delay-1">Every user who joins makes the network more valuable for every other user. A true compounding asset — the rarest thing in software.</p>
+        <div class="moat-points fade-up fade-up-delay-2">
+          <div class="moat-point">
+            <div class="moat-icon">📱</div>
+            <div>
+              <div class="moat-title">Phone contacts = real relationships</div>
+              <div class="moat-text">Invite-only + phone import means every connection is a genuine relationship — not a LinkedIn stranger who clicked accept. The trust is built in before the intro is ever requested.</div>
+            </div>
+          </div>
+          <div class="moat-point">
+            <div class="moat-icon">🔄</div>
+            <div>
+              <div class="moat-title">Network effects compound daily</div>
+              <div class="moat-text">Each new user doesn't add linearly — they multiply connections. User 100 makes users 1–99 more connected. This is Metcalfe's Law applied to deals: value grows as n², not n.</div>
+            </div>
+          </div>
+          <div class="moat-point">
+            <div class="moat-icon">🏆</div>
+            <div>
+              <div class="moat-title">Trust scores compound with use</div>
+              <div class="moat-text">Every intro made, every deal closed, every endorsement given adds to a trust score nobody else can replicate. Early users build a permanent reputation advantage over anyone who joins later.</div>
+            </div>
+          </div>
+          <div class="moat-point">
+            <div class="moat-icon">🔒</div>
+            <div>
+              <div class="moat-title">Structural lock-in without lock-in</div>
+              <div class="moat-text">Users stay because their deal flow lives here — not because they're trapped. The best kind of retention is when leaving means losing $40–60K in deal opportunities.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up fade-up-delay-1">
+        <div class="vs-box">
+          <div class="vs-title">DealNexus vs. LinkedIn Sales Nav</div>
+          <div class="vs-row">
+            <span class="vs-wp">Real relationships</span>
+            <span class="vs-metric">graph type</span>
+            <span class="vs-li">Strangers</span>
+          </div>
+          <div class="vs-row">
+            <span class="vs-wp">1-tap intro automation</span>
+            <span class="vs-metric">intro flow</span>
+            <span class="vs-li">100% manual</span>
+          </div>
+          <div class="vs-row">
+            <span class="vs-wp">AI writes the message</span>
+            <span class="vs-metric">outreach</span>
+            <span class="vs-li">You write it</span>
+          </div>
+          <div class="vs-row">
+            <span class="vs-wp">Minutes to intro</span>
+            <span class="vs-metric">speed</span>
+            <span class="vs-li">3–7 days</span>
+          </div>
+          <div class="vs-row">
+            <span class="vs-wp">Trust-scored paths</span>
+            <span class="vs-metric">quality</span>
+            <span class="vs-li">Unfiltered</span>
+          </div>
+          <div class="vs-row">
+            <span class="vs-wp">$39/month</span>
+            <span class="vs-metric">price</span>
+            <span class="vs-li">$99+/month</span>
+          </div>
+          <div class="vs-row" style="border-bottom:none;">
+            <span class="vs-wp">Deal-specific vertical</span>
+            <span class="vs-metric">focus</span>
+            <span class="vs-li">Generic B2B</span>
+          </div>
+        </div>
+
+        <!-- Investor pull quote -->
+        <div style="margin-top:24px;padding:24px;background:var(--navy3);border:1px solid rgba(0,201,177,0.2);border-radius:16px;">
+          <div style="font-size:11px;font-weight:600;color:var(--teal);letter-spacing:1px;margin-bottom:12px;">WHY INVESTORS GO WOW</div>
+          <p style="font-family:var(--serif);font-size:17px;color:var(--white);line-height:1.65;font-style:italic;">
+            "LinkedIn built the professional graph but left the last mile entirely manual. $2B+/year in Sales Navigator revenue proves people pay to find connections. DealNexus charges less — and does the thing LinkedIn refuses to automate."
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     ROI
+═══════════════════════════════════════════════ -->
+<section class="roi-section" id="roi">
+  <div class="section-inner">
+    <span class="section-label">The ROI math</span>
+    <h2 class="section-h2 fade-up">The math is <span class="teal">embarrassing.</span></h2>
+    <p class="section-sub fade-up fade-up-delay-1">
+      One extra deal per year from a warm intro = $40–60K profit. DealNexus costs $468/year.
+      That's a 85–128× return on investment from a single deal. The ROI from your second deal is infinite.
+    </p>
+
+    <div class="roi-grid">
+      <div class="roi-card re fade-up">
+        <span class="roi-emoji">🏠</span>
+        <div class="roi-persona">House Flipper / Private Lender</div>
+        <div class="roi-pain">"I have $2M sitting idle because I can't find qualified borrowers fast enough."</div>
+        <div class="roi-divider"></div>
+        <div class="roi-result teal">$62,000</div>
+        <div class="roi-result-sub">average profit from one warm-intro deal</div>
+        <div class="roi-math">
+          App cost:  $468 / year<br>
+          Deal profit: $62,000<br>
+          ROI:  132× on first deal<br>
+          ───────────────────<br>
+          Break-even: 1 intro in 12 months
+        </div>
+      </div>
+      <div class="roi-card flip fade-up fade-up-delay-1">
+        <span class="roi-emoji">🚀</span>
+        <div class="roi-persona">Startup Founder</div>
+        <div class="roi-pain">"I spent 3 months cold-emailing angels. 0 checks. One warm intro closes $100K in a week."</div>
+        <div class="roi-divider"></div>
+        <div class="roi-result purple">$500K</div>
+        <div class="roi-result-sub">seed round closed via 2-hop warm path</div>
+        <div class="roi-math">
+          App cost:  $468 / year<br>
+          Round size: $500,000<br>
+          ROI:  1,068× on first close<br>
+          ───────────────────<br>
+          Time saved: ~3 months
+        </div>
+      </div>
+      <div class="roi-card b2b fade-up fade-up-delay-2">
+        <span class="roi-emoji">🏢</span>
+        <div class="roi-persona">B2B Service Firm</div>
+        <div class="roi-pain">"80% of our revenue is referrals but we have zero system for generating them."</div>
+        <div class="roi-divider"></div>
+        <div class="roi-result gold">$18K / mo</div>
+        <div class="roi-result-sub">new MRR added from 2 warm-intro retainers</div>
+        <div class="roi-math">
+          App cost:  $468 / year<br>
+          New retainers: $18K MRR<br>
+          Year 1 value: $216,000<br>
+          ───────────────────<br>
+          ROI:  461× — year one only
+        </div>
+      </div>
+    </div>
+
+    <!-- The single sentence -->
+    <div style="margin-top:80px;text-align:center;" class="fade-up">
+      <div style="font-size:11px;color:var(--teal);letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;">The unfair advantage</div>
+      <p style="font-family:var(--serif);font-size:clamp(22px,3vw,36px);color:var(--white);line-height:1.5;max-width:820px;margin:0 auto;">
+        "Invite-only + phone contact import means every connection on DealNexus is a real relationship,
+        not a LinkedIn stranger. <em style="color:var(--teal);">The trust is built in before the intro is ever requested.</em>
+        No competitor can replicate that graph without starting from zero with a different product entirely."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════
+     PRICING / CTA
+═══════════════════════════════════════════════ -->
+<section class="cta-section" id="pricing">
+  <div class="section-inner" style="display:flex;flex-direction:column;align-items:center;">
+    <div class="cta-eyebrow">Simple, honest pricing</div>
+    <h2 class="cta-h2">Join while the<br><span class="teal">graph is still small.</span></h2>
+    <p class="cta-sub">Early users build a permanent trust-score advantage over anyone who joins later. The network effect works both ways — the sooner you're in, the more powerful your position.</p>
+
+    <div class="price-cards">
+      <div class="price-card">
+        <div class="price-name">Dealmaker</div>
+        <div><span class="price-amount">$39</span><span class="price-period">/month</span></div>
+        <ul class="price-features">
+          <li>Full 3-degree trust graph</li>
+          <li>20 warm intro requests/month</li>
+          <li>AI message drafting</li>
+          <li>Push-notification intro flow</li>
+          <li>Intent signal feed</li>
+          <li>Deal map — RE, Startup, Business</li>
+        </ul>
+      </div>
+      <div class="price-card featured">
+        <div class="price-badge">Most popular</div>
+        <div class="price-name">Power Dealer</div>
+        <div><span class="price-amount">$79</span><span class="price-period">/month</span></div>
+        <ul class="price-features">
+          <li>Everything in Dealmaker</li>
+          <li>Unlimited intro requests</li>
+          <li>Priority signal routing</li>
+          <li>Network power analytics</li>
+          <li>Connection net-worth estimates</li>
+          <li>White-glove intro drafting</li>
+          <li>Early access to new deal types</li>
+        </ul>
+      </div>
+      <div class="price-card">
+        <div class="price-name">Team / Fund</div>
+        <div><span class="price-amount">$249</span><span class="price-period">/month</span></div>
+        <ul class="price-features">
+          <li>Up to 5 team members</li>
+          <li>Shared network graph</li>
+          <li>Team signal dashboard</li>
+          <li>CRM export (Salesforce, HubSpot)</li>
+          <li>Dedicated onboarding</li>
+          <li>Custom deal verticals</li>
+        </ul>
+      </div>
+    </div>
+
+    <a href="#" class="btn-primary" style="font-size:16px;padding:18px 48px;border-radius:12px;">Request invite access →</a>
+    <p style="font-size:12px;color:var(--muted);margin-top:16px;">Invite-only · Rhode Island beachhead · expanding Q3 2025</p>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-logo">DealNexus</span>
+  <span class="footer-text">© 2025 DealNexus Inc. · Providence, RI · Internal/Prospect Brief · Confidential.</span>
+  <span class="footer-text" style="color:var(--teal);">dealnexus.io</span>
+</footer>
+
+<script>
+/* Typewriter */
+const phrases = [
+  "I need a private lender in RI, $200K, 30 days",
+  "Looking for a PropTech seed investor, $100K+",
+  "Who knows a business broker in Providence?",
+  "Need a hard money lender, close this week"
+];
+let phraseIdx = 0, charIdx = 0, deleting = false;
+const el = document.getElementById('typewriter');
+const resultsLabel = document.getElementById('results-label');
+const r1 = document.getElementById('result-1');
+const r2 = document.getElementById('result-2');
+let resultsVisible = false;
+const introStatusBtn = document.getElementById('intro-status-btn');
+let introApproved = false;
+
+function type() {
+  const phrase = phrases[phraseIdx];
+  if (!deleting) {
+    el.textContent = phrase.slice(0, charIdx + 1);
+    charIdx++;
+    if (charIdx === phrase.length) {
+      if (!resultsVisible) {
+        resultsVisible = true;
+        setTimeout(() => {
+          resultsLabel.style.opacity = '1';
+          r1.style.opacity = '1'; r1.style.transform = 'translateY(0)';
+          setTimeout(() => { r2.style.opacity = '1'; r2.style.transform = 'translateY(0)'; }, 120);
+        }, 600);
+      }
+      setTimeout(() => { deleting = true; }, 3200);
+      setTimeout(type, 3200);
+      return;
+    }
+  } else {
+    el.textContent = phrase.slice(0, charIdx - 1);
+    charIdx--;
+    if (charIdx === 0) {
+      deleting = false;
+      resultsVisible = false;
+      resultsLabel.style.opacity = '0';
+      r1.style.opacity = '0'; r1.style.transform = 'translateY(8px)';
+      r2.style.opacity = '0'; r2.style.transform = 'translateY(8px)';
+      phraseIdx = (phraseIdx + 1) % phrases.length;
+      setTimeout(type, 400);
+      return;
+    }
+  }
+  setTimeout(type, deleting ? 28 : 52);
+}
+setTimeout(type, 800);
+
+if (introStatusBtn) {
+  introStatusBtn.addEventListener('click', () => {
+    introApproved = !introApproved;
+    introStatusBtn.textContent = introApproved ? 'Intro sent to Dave ✓' : 'Approve intro ✓';
+    introStatusBtn.style.background = introApproved ? 'rgba(0,201,177,0.25)' : 'rgba(0,201,177,0.14)';
+    introStatusBtn.style.borderColor = introApproved ? 'rgba(0,201,177,0.55)' : 'rgba(0,201,177,0.35)';
+  });
+}
+
+/* Scroll-triggered fade-up */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); }
+  });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+<script src="assets/theme-toggle.js"></script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Inter:wght@300;400;500;600&display=swap');
+
+:root {
+  --bg-void: #080A0F;
+  --bg-base: #0D1017;
+  --bg-surface: #111620;
+  --bg-elevated: #161C2A;
+  --bg-highlight: #1C2438;
+  --bg-overlay: rgba(8,10,15,0.85);
+
+  --ink-primary: #E8EDF5;
+  --ink-secondary: #8A95A8;
+  --ink-tertiary: #4A5568;
+  --ink-inverted: #080A0F;
+
+  --gold: #C9A84C;
+  --gold-bright: #E8C96A;
+  --gold-dim: #8A6E2E;
+  --gold-glow: rgba(201,168,76,0.15);
+  --gold-border: rgba(201,168,76,0.25);
+  --gold-surface: rgba(201,168,76,0.08);
+
+  --gain: #22C97A;
+  --loss: #E8415A;
+  --neutral: #8A95A8;
+
+  --border-subtle: rgba(255,255,255,0.05);
+  --border-default: rgba(255,255,255,0.09);
+  --border-emphasis: rgba(255,255,255,0.16);
+
+  --shadow-panel: 0 0 0 1px var(--border-default), 0 4px 24px rgba(0,0,0,0.5);
+}
+
+[data-theme="light"] {
+  --bg-void: #F0F2F5;
+  --bg-base: #F5F7FA;
+  --bg-surface: #FFFFFF;
+  --bg-elevated: #FAFBFC;
+  --bg-highlight: #F0F4FF;
+  --bg-overlay: rgba(245,247,250,0.9);
+
+  --ink-primary: #111827;
+  --ink-secondary: #4B5563;
+  --ink-tertiary: #9CA3AF;
+  --ink-inverted: #FFFFFF;
+
+  --gold: #A07E2D;
+  --gold-bright: #B89335;
+  --gold-dim: #8A6E2E;
+  --gold-border: rgba(160,126,45,0.30);
+  --gold-surface: rgba(160,126,45,0.08);
+
+  --border-subtle: rgba(0,0,0,0.06);
+  --border-default: rgba(0,0,0,0.10);
+  --border-emphasis: rgba(0,0,0,0.18);
+
+  --shadow-panel: 0 0 0 1px rgba(0,0,0,0.08), 0 4px 16px rgba(0,0,0,0.08);
+}
+
+html, body {
+  background: var(--bg-base) !important;
+  color: var(--ink-primary) !important;
+  font-family: 'Inter', sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.brand, .nav-logo, .footer-logo, .section-h2, .cta-h2, .ptitle {
+  font-family: 'Syne', sans-serif !important;
+  letter-spacing: -0.01em;
+}
+
+.num, .price-amount, .stat, .n, .roi-result, .hero-stat .num {
+  font-family: 'IBM Plex Mono', monospace !important;
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: 'tnum' 1;
+}
+
+.card, .price-card, .problem-card, .story-card, .moat-point, .vs-box, .roi-card, .intro-side, .slide, .stcrd, .pwrcrd, .ncrd, .dcard, .cconn, .icard {
+  background: var(--bg-surface) !important;
+  border-color: var(--border-default) !important;
+  box-shadow: var(--shadow-panel) !important;
+}
+
+.btn-primary, .nav-cta, .btn-app, .intro-status {
+  background: var(--gold) !important;
+  color: var(--ink-inverted) !important;
+  border-color: var(--gold-border) !important;
+}
+
+.btn-primary:hover, .nav-cta:hover, .btn-app:hover, .intro-status:hover {
+  background: var(--gold-bright) !important;
+}
+
+.btn-ghost, .theme-btn, .ifbtn, .isub, .scr-tab, .atab {
+  border-color: var(--border-default) !important;
+  color: var(--ink-secondary) !important;
+  background: transparent !important;
+}
+
+.label, .section-label, .cta-eyebrow, .hero-label, .kicker, .tag, .price-name, .psub, .muted, .meta, .footer-text {
+  color: var(--ink-secondary) !important;
+}
+
+.teal, .nav-feature, .accent-teal, .hero-label, .section-label {
+  color: var(--gold) !important;
+}
+
+.hero-label, .nav-feature, .price-card.featured {
+  border-color: var(--gold-border) !important;
+  background: var(--gold-surface) !important;
+}
+
+.delta-gain, .gain, .accent-gain { color: var(--gain) !important; }
+.delta-loss, .loss, .accent-loss { color: var(--loss) !important; }
+
+.theme-toggle-btn {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 9999;
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  background: var(--bg-elevated);
+  color: var(--ink-primary);
+  font: 500 12px 'Inter', sans-serif;
+  cursor: pointer;
+  box-shadow: var(--shadow-panel);
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--border-emphasis);
+}

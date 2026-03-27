@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+  <title>DealNexus Executive Pitch</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/aurum-design-system.css">
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box}
+    :root{
+      --navy:#071021;
+      --navy2:#101b2e;
+      --teal:#00c9b1;
+      --gold:#f0b429;
+      --purple:#8b5cf6;
+      --white:#f4f6fa;
+      --muted:rgba(244,246,250,0.72);
+      --border:rgba(255,255,255,0.1);
+      --sans:'Sora',sans-serif;
+      --mono:'DM Mono',monospace;
+    }
+    body{
+      background:radial-gradient(ellipse at 20% 0%, rgba(0,201,177,0.08), transparent 50%), var(--navy);
+      color:var(--white);
+      font-family:var(--sans);
+      line-height:1.5;
+      overflow-x:hidden;
+    }
+    .wrap{max-width:1180px;margin:0 auto;padding:28px 24px 60px}
+    .global-menu{
+      display:flex;gap:16px;flex-wrap:wrap;margin:0 0 16px;
+      padding:10px;border:1px solid var(--border);border-radius:12px;
+      background:rgba(3,8,16,0.75);
+    }
+    .global-menu a{
+      text-decoration:none;
+      color:var(--gold);
+      background:rgba(255,255,255,0.02);
+      border:1px solid rgba(201,168,76,0.35);
+      border-radius:999px;
+      padding:10px 20px;
+      font-family:'Syne',sans-serif;
+      font-size:17px;
+      font-weight:600;
+      letter-spacing:0.01em;
+      transition:all .2s;
+    }
+    .global-menu a:hover{border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.1);}
+    .global-menu a.active{background:rgba(201,168,76,0.12);}
+    .top{
+      display:flex;justify-content:space-between;align-items:center;gap:10px;
+      border-bottom:1px solid var(--border);padding-bottom:14px;margin-bottom:20px;
+    }
+    .brand{font-size:12px;letter-spacing:2px;text-transform:uppercase;font-weight:800;color:var(--teal)}
+    .conf{font-size:11px;color:var(--muted)}
+    .nav{
+      display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px;
+      position:sticky;top:0;background:rgba(7,16,33,0.9);backdrop-filter:blur(8px);padding:10px 0;z-index:20;
+    }
+    .nav a{
+      font-size:11px;color:var(--muted);text-decoration:none;padding:7px 10px;
+      border:1px solid var(--border);border-radius:999px;transition:.2s;
+    }
+    .nav a:hover{color:var(--white);border-color:rgba(0,201,177,0.4)}
+    .slide{
+      min-height:86vh;
+      border:1px solid var(--border);
+      border-radius:18px;
+      background:linear-gradient(155deg, rgba(16,27,46,0.96), rgba(10,17,30,0.98));
+      padding:34px;
+      margin:0 0 18px 0;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+      box-shadow:0 24px 60px rgba(0,0,0,0.4);
+    }
+    .kicker{font-size:11px;letter-spacing:1.6px;text-transform:uppercase;color:var(--teal);font-weight:700;margin-bottom:8px}
+    .slide-no{font-size:10px;color:rgba(244,246,250,0.46);font-family:var(--mono);margin-bottom:10px}
+    h1,h2{line-height:1.08;letter-spacing:-0.8px;margin-bottom:14px}
+    h1{font-size:clamp(34px,5vw,62px);max-width:900px}
+    h2{font-size:clamp(30px,4vw,52px)}
+    .sub{font-size:17px;color:var(--muted);max-width:860px}
+    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+    .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:18px}
+    .card{
+      background:rgba(255,255,255,0.03);border:1px solid var(--border);border-radius:12px;padding:14px;
+    }
+    .card h3{font-size:14px;margin-bottom:6px}
+    .card p{font-size:13px;color:var(--muted)}
+    .stat{font-family:var(--mono);font-size:34px;font-weight:700}
+    .accent-teal{color:var(--teal)}
+    .accent-gold{color:var(--gold)}
+    .accent-purple{color:var(--purple)}
+    .table{
+      margin-top:16px;border:1px solid var(--border);border-radius:12px;overflow:hidden;
+    }
+    .row{
+      display:grid;grid-template-columns:1.2fr 1fr 1fr;
+      border-bottom:1px solid var(--border);
+    }
+    .row:last-child{border-bottom:none}
+    .row > div{padding:12px;font-size:12px}
+    .head{background:rgba(255,255,255,0.04);font-weight:700;color:var(--muted)}
+    .timeline{
+      display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px;
+    }
+    .step{
+      border:1px solid var(--border);border-radius:12px;padding:12px;background:rgba(0,201,177,0.06);
+    }
+    .step .n{font-family:var(--mono);font-size:18px;color:var(--teal);margin-bottom:4px}
+    .step .t{font-size:12px;font-weight:700;margin-bottom:3px}
+    .step .d{font-size:11px;color:var(--muted)}
+    .foot{font-size:11px;color:var(--muted);margin-top:20px}
+    @media(max-width:900px){
+      .slide{padding:20px;min-height:auto}
+      .grid2,.grid3,.timeline{grid-template-columns:1fr}
+      .row{grid-template-columns:1fr}
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="global-menu">
+      <a href="index.html">Home</a>
+      <a href="demand-signals.html">Demand Signals</a>
+      <a href="executive-pitch.html" class="active">Executive Pitch</a>
+      <a href="mockups/dealnexus-product-mockup.html">Product Mockup</a>
+    </div>
+    <div class="top">
+      <div class="brand">DealNexus · Executive Pitch</div>
+      <div class="conf">Internal / prospect-facing · Confidential</div>
+    </div>
+
+    <div class="nav">
+      <a href="#s1">01 The Mirror</a>
+      <a href="#s2">02 The Villain</a>
+      <a href="#s3">03 Exit Proof</a>
+      <a href="#s4">04 The Weapon</a>
+      <a href="#s5">05 Growth Engine</a>
+      <a href="#s6">06 Roadmap</a>
+      <a href="#s7">07 Revenue Model</a>
+      <a href="#s8">08 The Ask</a>
+      <a href="#s9">09 Risks</a>
+      <a href="#s10">10 Why Now</a>
+      <a href="#s11">11 Regulatory</a>
+    </div>
+
+    <section class="slide" id="s1">
+      <div>
+        <div class="slide-no">Slide 1 / Executive Web Deck</div>
+        <div class="kicker">Module 1 · The Mirror</div>
+        <h1>It's Tuesday. You need <span class="accent-teal">$200K by Friday.</span></h1>
+        <p class="sub">You're staring at your phone. The flip deal closes in 72 hours. Your usual lender just went silent. You start texting people: "Hey, do you know anyone who does hard money in PA?"</p>
+        <p class="sub" style="font-size:15px;margin-top:8px;color:rgba(244,246,250,0.88);"><span class="accent-teal">LinkedIn lets you find people.</span> DealNexus gets you introduced through people who trust you both.</p>
+        <div class="grid3">
+          <div class="card"><h3 class="accent-teal">13x</h3><p>Warm intro conversion vs. cold outreach.</p></div>
+          <div class="card"><h3 class="accent-gold">3-7 days</h3><p>Typical manual warm-intro orchestration time.</p></div>
+          <div class="card"><h3 class="accent-purple">700K+</h3><p>Users paying for connection tools while intro execution stays manual.</p></div>
+        </div>
+      </div>
+      <p class="foot">Every deal-maker has lived this story. The warm intro exists; the orchestration layer is broken.</p>
+    </section>
+
+    <section class="slide" id="s2">
+      <div>
+        <div class="slide-no">Slide 2 / Executive Web Deck</div>
+        <div class="kicker">Module 2 · The Villain</div>
+        <h2>The villain is not a competitor. It's the <span class="accent-teal">manual intro chain</span>.</h2>
+        <div class="grid2">
+          <div class="card">
+            <div class="stat accent-gold">Time Theft</div>
+            <p>3-7 days lost per intro attempt. Across active deal-makers, that becomes months of lost bandwidth.</p>
+          </div>
+          <div class="card">
+            <div class="stat accent-purple">Deal Decay</div>
+            <p>Deal windows are 24-72 hours. Manual intro chains often take 72-168 hours.</p>
+          </div>
+          <div class="card">
+            <div class="stat accent-teal">Capital Drag</div>
+            <p>Private lenders lose yield to idle capital while qualified borrowers remain undiscovered.</p>
+          </div>
+          <div class="card">
+            <div class="stat">Hidden Cost</div>
+            <p>Users pay for better search filters, but still do intro routing manually.</p>
+          </div>
+        </div>
+      </div>
+      <p class="foot">The thing nobody noticed: people pay for "mastermind access" that is effectively a curated warm-intro network.</p>
+    </section>
+
+    <section class="slide" id="s3">
+      <div>
+        <div class="slide-no">Slide 3 / Executive Web Deck</div>
+        <div class="kicker">Module 3 · Exit Proof</div>
+        <h2>Category proof exists. DealNexus upgrades it with <span class="accent-teal">AI trust routing</span>.</h2>
+        <div class="table">
+          <div class="row head">
+            <div>Reference</div><div>What Exists</div><div>What DealNexus Adds</div>
+          </div>
+          <div class="row">
+            <div>The Swarm</div><div>B2B relationship mapping</div><div>Consumer mobile + double opt-in intro flow + AI context</div>
+          </div>
+          <div class="row">
+            <div>LinkedIn Sales Navigator</div><div>Search filters + InMail</div><div>Automated warm intro routing and approvals</div>
+          </div>
+          <div class="row">
+            <div>WhatsApp / informal networks</div><div>Where deals happen today</div><div>Structured graph, ranking, and repeatable conversion workflow</div>
+          </div>
+        </div>
+      </div>
+      <p class="foot">The window is open now: category validated, but consumer deal-makers remain underserved.</p>
+    </section>
+
+    <section class="slide" id="s4">
+      <div>
+        <div class="slide-no">Slide 4 / Executive Web Deck</div>
+        <div class="kicker">Module 5 · The Weapon</div>
+        <h2>Every row where competitors score zero is a moat.</h2>
+        <div class="grid3">
+          <div class="card">
+            <h3>Consumer mobile app</h3>
+            <p>Built for individual deal-makers, not only enterprise sales teams.</p>
+          </div>
+          <div class="card">
+            <h3>Double opt-in intro flow</h3>
+            <p>Intermediary and target approvals preserve social capital and quality.</p>
+          </div>
+          <div class="card">
+            <h3>Reputation + network gap detection</h3>
+            <p>The graph compounds quality by learning who introduces well and where gaps exist.</p>
+          </div>
+        </div>
+        <div class="card" style="margin-top:14px">
+          <h3>Positioning line</h3>
+          <p>LinkedIn lets you find people. DealNexus gets you introduced through people who trust you both.</p>
+        </div>
+      </div>
+      <p class="foot">This is the execution layer competitors do not provide.</p>
+    </section>
+
+    <section class="slide" id="s5">
+      <div>
+        <div class="slide-no">Slide 5 / Executive Web Deck</div>
+        <div class="kicker">Module 4 · Growth Engine</div>
+        <h2>The flywheel nobody else can replicate.</h2>
+        <div class="timeline">
+          <div class="step"><div class="n">01</div><div class="t">More lenders</div><div class="d">Supply depth improves borrower matching quality immediately.</div></div>
+          <div class="step"><div class="n">02</div><div class="t">Better matches</div><div class="d">Higher-intent intros convert faster, proving user value.</div></div>
+          <div class="step"><div class="n">03</div><div class="t">More closed deals</div><div class="d">Outcomes generate testimonials and stronger referral pull.</div></div>
+          <div class="step"><div class="n">04</div><div class="t">More users</div><div class="d">Invite loops deepen trust graph and reduce acquisition cost.</div></div>
+        </div>
+        <div class="grid2" style="margin-top:14px">
+          <div class="card"><h3>Beachhead</h3><p>Private lenders first: highest willingness-to-pay and strongest graph pull effect.</p></div>
+          <div class="card"><h3>Moat formation</h3><p>Invite-only trust graph and outcomes data compound faster than paid-acquisition networks.</p></div>
+        </div>
+      </div>
+      <p class="foot">Invite-only + phone-contact graph creates a structural moat, not a temporary growth hack.</p>
+    </section>
+
+    <section class="slide" id="s6">
+      <div>
+        <div class="slide-no">Slide 6 / Executive Web Deck</div>
+        <div class="kicker">Module 6 · Roadmap</div>
+        <h2>Three phases. Each one earns the next.</h2>
+        <div class="grid3">
+          <div class="card">
+            <h3>Phase 1: Foundation (Weeks 1-8)</h3>
+            <p>Invite auth, contact import, structured profiles, network map, manual intro flow + push.</p>
+          </div>
+          <div class="card">
+            <h3>Phase 2: AI Layer (Weeks 9-14)</h3>
+            <p>Natural language search, trust-path ranking, AI drafting, and smart result prioritization.</p>
+          </div>
+          <div class="card">
+            <h3>Phase 3: Growth + Monetization (Weeks 15-20)</h3>
+            <p>Reputation scoring, gap detection, outcome tracking, and Pro/Closer monetization.</p>
+          </div>
+        </div>
+      </div>
+      <p class="foot">Roadmap logic: prove intro flow, then scale intelligence, then compound monetization.</p>
+    </section>
+
+    <section class="slide" id="s7">
+      <div>
+        <div class="slide-no">Slide 7 / Executive Web Deck</div>
+        <div class="kicker">Module 7 · Revenue Model</div>
+        <h2>Four revenue streams. Subscriptions are the floor.</h2>
+        <div class="table">
+          <div class="row head">
+            <div>Revenue Stream</div><div>Price</div><div>Role at maturity</div>
+          </div>
+          <div class="row">
+            <div>Pro Subscription</div><div>$39/mo</div><div>Core recurring revenue</div>
+          </div>
+          <div class="row">
+            <div>Closer Subscription</div><div>$99/mo</div><div>Power user monetization</div>
+          </div>
+          <div class="row">
+            <div>Verified Profiles</div><div>$99-199/mo</div><div>Service provider monetization</div>
+          </div>
+          <div class="row">
+            <div>Lender Referral Fees</div><div>0.25-0.5%</div><div>Outcome-linked upside</div>
+          </div>
+        </div>
+        <div class="grid2" style="margin-top:14px">
+          <div class="card"><h3>Conservative path</h3><p>~10% free→Pro and ~2% free→Closer can approach ~$1M ARR with sufficient graph scale.</p></div>
+          <div class="card"><h3>ROI narrative</h3><p>One additional warm-intro deal can cover years of subscription cost.</p></div>
+        </div>
+      </div>
+      <p class="foot">The model is intentionally conservative; upside comes from better conversion and referral outcomes.</p>
+    </section>
+
+    <section class="slide" id="s8">
+      <div>
+        <div class="slide-no">Slide 8 / Executive Web Deck</div>
+        <div class="kicker">Module 8 · The Ask</div>
+        <h2>Three ways to start. One recommended.</h2>
+        <div class="grid3">
+          <div class="card">
+            <h3>Option B: Sprint 0 (Recommended)</h3>
+            <p>4-6 weeks. Real product with auth, contacts, profiles, and intro flow. Best speed/certainty balance.</p>
+          </div>
+          <div class="card">
+            <h3>Option C: Full Phase 1</h3>
+            <p>~8 weeks. Includes AI search, trust-path scoring, intro drafting, and monetization readiness.</p>
+          </div>
+        </div>
+      </div>
+      <p class="foot">Recommendation: Option B (Sprint 0), then Phase 1 AI expansion using live usage evidence.</p>
+    </section>
+
+    <section class="slide" id="s9">
+      <div>
+        <div class="slide-no">Slide 9 / Executive Web Deck</div>
+        <div class="kicker">Risk Transparency</div>
+        <h2>Red-team view: what can break and how we mitigate it.</h2>
+        <div class="table">
+          <div class="row head">
+            <div>Risk</div><div>Severity</div><div>Mitigation</div>
+          </div>
+          <div class="row">
+            <div>Cold start / graph density</div><div class="accent-gold">High</div><div>Launch in one metro + one vertical (private lenders first) for density before breadth.</div>
+          </div>
+          <div class="row">
+            <div>Intermediary fatigue</div><div class="accent-gold">High</div><div>Rate limits, preference controls, and better match ranking reduce low-signal requests.</div>
+          </div>
+          <div class="row">
+            <div>Contact import trust concerns</div><div class="accent-gold">High</div><div>Opt-in only, hashed contact storage, no raw-number persistence, transparent consent UX.</div>
+          </div>
+          <div class="row">
+            <div>Incumbent reaction</div><div>Medium</div><div>Incumbents monetize cold workflows; warm-routing cannibalizes their existing model.</div>
+          </div>
+        </div>
+      </div>
+      <p class="foot">Risk posture is manageable with phased rollout and strict trust-preserving product controls.</p>
+    </section>
+
+    <section class="slide" id="s10">
+      <div>
+        <div class="slide-no">Slide 10 / Executive Web Deck</div>
+        <div class="kicker">Timing Argument</div>
+        <h2>Why this is viable now — and was not viable 2-3 years ago.</h2>
+        <div class="timeline">
+          <div class="step"><div class="n">2023</div><div class="t">AI quality crossed threshold</div><div class="d">Model output quality now supports natural, context-rich intro drafting.</div></div>
+          <div class="step"><div class="n">2023+</div><div class="t">Cold outreach fatigue increased</div><div class="d">Teams pay more for prospecting while response quality continues to compress.</div></div>
+          <div class="step"><div class="n">2024+</div><div class="t">Category validated</div><div class="d">Warm-intro mapping solutions proved demand, but left consumer deal-makers underserved.</div></div>
+          <div class="step"><div class="n">Now</div><div class="t">Window is open</div><div class="d">First trusted graph in a category compounds structural advantage over late entrants.</div></div>
+        </div>
+      </div>
+      <p class="foot">Execution speed now determines who owns the trust graph, not who copies features later.</p>
+    </section>
+
+    <section class="slide" id="s11">
+      <div>
+        <div class="slide-no">Slide 11 / Executive Web Deck</div>
+        <div class="kicker">Regulatory</div>
+        <h2>Regulatory profile remains clean for a networking-first product.</h2>
+        <div class="grid2">
+          <div class="card">
+            <h3>No securities platform exposure</h3>
+            <p>DealNexus facilitates introductions and workflow, not investment products or transaction execution.</p>
+          </div>
+          <div class="card">
+            <h3>No broker-dealer role</h3>
+            <p>Primary monetization is subscription and software value, not transaction brokerage.</p>
+          </div>
+          <div class="card">
+            <h3>Privacy by architecture</h3>
+            <p>Hash-first contact handling and explicit opt-in flows align with common modern communication app patterns.</p>
+          </div>
+          <div class="card">
+            <h3>Comparable category precedent</h3>
+            <p>Positioning is aligned with professional networking tooling, with tighter trust and consent controls.</p>
+          </div>
+        </div>
+      </div>
+      <p class="foot">Legal review still required per jurisdiction, but baseline operating model is materially lower-risk than marketplace alternatives.</p>
+    </section>
+  </div>
+  <script>
+    (async function renderInvestorDeckAsIs() {
+      const dataPath = "data/investordeck-extracted.txt";
+      const text = await fetch(dataPath).then(r => {
+        if (!r.ok) throw new Error("Unable to load investor deck text");
+        return r.text();
+      });
+
+      const slideRegex = /--- SLIDE (\d+) ---\n([\s\S]*?)(?=\n--- SLIDE \d+ ---|$)/g;
+      const slides = [];
+      for (const m of text.matchAll(slideRegex)) {
+        slides.push({
+          num: Number(m[1]),
+          lines: m[2].split("\n").map(s => s.trim()).filter(Boolean),
+        });
+      }
+
+      document.body.innerHTML = "";
+
+      const style = document.createElement("style");
+      style.textContent = `
+        *{box-sizing:border-box}
+        body{
+          margin:0;
+          padding:28px 20px 56px;
+          background:var(--bg-base);
+          color:var(--ink-primary);
+          font-family:'Inter',sans-serif;
+        }
+        .wrap{max-width:1200px;margin:0 auto}
+        .global-menu{
+          display:flex;gap:16px;flex-wrap:wrap;margin:0 0 18px;
+          padding:10px;border:1px solid var(--border-default);border-radius:12px;background:var(--bg-void);
+        }
+        .global-menu a{
+          text-decoration:none;color:var(--gold);border:1px solid var(--gold-border);background:rgba(255,255,255,0.02);
+          border-radius:999px;padding:10px 20px;font-family:'Syne',sans-serif;font-size:17px;font-weight:600;
+        }
+        .global-menu a.active{background:var(--gold-surface)}
+        .top{
+          display:flex;justify-content:space-between;align-items:center;gap:12px;
+          margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--border-default);
+        }
+        .brand{font-family:'Syne',sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold);font-weight:700}
+        .meta{font-size:12px;color:var(--ink-secondary)}
+        .slide{
+          background:var(--bg-surface);border:1px solid var(--border-default);border-radius:10px;
+          padding:18px 20px;margin:0 0 14px;box-shadow:var(--shadow-panel);
+        }
+        .slide-head{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}
+        .slide-title{font-family:'Syne',sans-serif;font-size:18px;color:var(--ink-primary)}
+        .slide-no{font-family:'IBM Plex Mono',monospace;font-size:11px;color:var(--ink-secondary)}
+        .line{
+          margin:0 0 6px;
+          color:var(--ink-primary);
+          font-size:14px;
+          line-height:1.5;
+          white-space:pre-wrap;
+          word-break:break-word;
+        }
+      `;
+      document.head.appendChild(style);
+
+      const wrap = document.createElement("div");
+      wrap.className = "wrap";
+      wrap.innerHTML = `
+        <div class="global-menu">
+          <a href="index.html">Home</a>
+          <a href="demand-signals.html">Demand Signals</a>
+          <a href="executive-pitch.html" class="active">Executive Pitch</a>
+          <a href="mockups/dealnexus-product-mockup.html">Product Mockup</a>
+        </div>
+        <div class="top">
+          <div class="brand">DealNexus · Investor Deck (As-Is)</div>
+          <div class="meta">Source: DealNexus_InvestorDeck_2026.pptx</div>
+        </div>
+      `;
+
+      const frag = document.createDocumentFragment();
+      slides.forEach(slide => {
+        const sec = document.createElement("section");
+        sec.className = "slide";
+
+        const head = document.createElement("div");
+        head.className = "slide-head";
+        head.innerHTML = `<div class="slide-title">Slide ${slide.num}</div><div class="slide-no">${String(slide.num).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}</div>`;
+        sec.appendChild(head);
+
+        slide.lines.forEach(line => {
+          const p = document.createElement("p");
+          p.className = "line";
+          p.textContent = line;
+          sec.appendChild(p);
+        });
+
+        frag.appendChild(sec);
+      });
+
+      wrap.appendChild(frag);
+      document.body.appendChild(wrap);
+    })().catch((err) => {
+      console.error(err);
+    });
+  </script>
+  <script src="assets/theme-toggle.js"></script>
+</body>
+</html>

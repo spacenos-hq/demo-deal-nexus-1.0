@@ -1,0 +1,937 @@
+
+<style>
+@import url('../assets/aurum-design-system.css');
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+*{margin:0;padding:0;box-sizing:border-box;}
+
+.wp-root{display:flex;flex-direction:column;align-items:center;padding:1.5rem 1rem 3rem;font-family:'Sora',sans-serif;transition:background 0.4s;}
+.wp-root.dark{background:#060a12;}
+.wp-root.light{background:#dde4ef;}
+
+.top-bar{display:flex;align-items:center;justify-content:space-between;width:360px;margin-bottom:12px;}
+.global-menu{
+  width:min(980px,100%);
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin:0 0 14px;
+  padding:10px;
+  border:1px solid var(--border-default);
+  border-radius:12px;
+  background:var(--bg-void);
+}
+.global-menu a{
+  text-decoration:none;
+  color:var(--gold);
+  border:1px solid var(--gold-border);
+  background:rgba(255,255,255,0.02);
+  border-radius:999px;
+  padding:10px 20px;
+  font-family:'Syne',sans-serif;
+  font-size:17px;
+  font-weight:600;
+  letter-spacing:0.01em;
+  transition:all .2s;
+}
+.global-menu a:hover{background:var(--gold-surface);border-color:rgba(201,168,76,0.45);}
+.global-menu a.active{background:var(--gold-surface);}
+.brand{font-size:13px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;}
+.dark .brand{color:#00C9B1;}
+.light .brand{color:#0a7c6e;}
+.top-note{width:360px;font-size:10px;letter-spacing:0.35px;margin:-2px 0 8px;}
+.dark .top-note{color:rgba(244,246,250,0.6);}
+.light .top-note{color:rgba(30,41,59,0.6);}
+
+.theme-btn{display:flex;align-items:center;gap:7px;cursor:pointer;padding:6px 14px;border-radius:20px;border:1.5px solid;font-size:11px;font-weight:600;font-family:'Sora',sans-serif;transition:all 0.3s;background:none;}
+.dark .theme-btn{border-color:rgba(255,255,255,0.15);color:rgba(244,246,250,0.65);}
+.light .theme-btn{border-color:rgba(0,0,0,0.18);color:#475569;}
+
+.scr-tabs{display:flex;gap:5px;padding:4px;border-radius:12px;width:360px;margin-bottom:12px;transition:background 0.3s;}
+.dark .scr-tabs{background:rgba(255,255,255,0.05);}
+.light .scr-tabs{background:rgba(0,0,0,0.07);}
+.scr-tab{flex:1;padding:7px 4px;text-align:center;border-radius:8px;cursor:pointer;font-size:10px;font-weight:600;transition:all 0.25s;border:none;background:none;font-family:'Sora',sans-serif;}
+.dark .scr-tab{color:rgba(244,246,250,0.4);}
+.light .scr-tab{color:rgba(30,41,59,0.5);}
+.scr-tab.on{background:#00C9B1;color:#0B1220;}
+
+.phone{width:360px;height:760px;border-radius:46px;border:1.5px solid;overflow:hidden;position:relative;transition:all 0.4s;}
+.dark .phone{background:#0B1220;border-color:rgba(255,255,255,0.1);box-shadow:0 0 80px rgba(0,201,177,0.07),0 40px 80px rgba(0,0,0,0.7);}
+.light .phone{background:#eef2f8;border-color:rgba(0,0,0,0.12);box-shadow:0 0 40px rgba(0,150,136,0.08),0 30px 60px rgba(0,0,0,0.15);}
+
+.notch{position:absolute;top:0;left:50%;transform:translateX(-50%);width:110px;height:30px;border-radius:0 0 14px 14px;z-index:100;display:flex;align-items:center;justify-content:center;}
+.dark .notch{background:#0B1220;}
+.light .notch{background:#eef2f8;}
+.notch-dot{width:9px;height:9px;border-radius:50%;}
+.dark .notch-dot{background:#0d1a30;border:1.5px solid rgba(255,255,255,0.07);}
+.light .notch-dot{background:#c8d4e4;border:1.5px solid rgba(0,0,0,0.1);}
+
+.scr{position:absolute;top:0;left:0;width:100%;height:100%;opacity:0;transform:translateX(30px);transition:all 0.4s cubic-bezier(0.4,0,0.2,1);pointer-events:none;overflow:hidden;}
+.scr.on{opacity:1;transform:translateX(0);pointer-events:all;}
+.scr.out{opacity:0;transform:translateX(-30px);}
+
+.sbar{height:44px;display:flex;align-items:center;justify-content:space-between;padding:10px 22px 0;}
+.stime{font-size:13px;font-weight:600;}
+.dark .stime{color:#F4F6FA;}
+.light .stime{color:#1e293b;}
+
+.nbar{position:absolute;bottom:0;left:0;right:0;height:74px;display:flex;align-items:center;justify-content:space-around;padding:0 4px 12px;z-index:50;border-top:1px solid;transition:all 0.3s;}
+.dark .nbar{background:rgba(9,14,23,0.97);border-color:rgba(255,255,255,0.07);}
+.light .nbar{background:rgba(238,242,248,0.97);border-color:rgba(0,0,0,0.08);}
+.ni{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;padding:5px 10px;border-radius:12px;flex:1;transition:background 0.2s;}
+.ni-label{font-size:9px;letter-spacing:0.3px;font-weight:500;transition:color 0.3s;}
+.dark .ni-label{color:rgba(244,246,250,0.3);}
+.light .ni-label{color:rgba(30,41,59,0.4);}
+.ni.on .ni-label{color:#00C9B1 !important;}
+.ni-ic{width:20px;height:20px;}
+.dark .ni-ic{opacity:0.3;stroke:#F4F6FA;}
+.light .ni-ic{opacity:0.35;stroke:#1e293b;}
+.ni.on .ni-ic{opacity:1;stroke:#00C9B1;}
+.ndot{width:4px;height:4px;border-radius:50%;background:#00C9B1;}
+
+.atabs{display:flex;gap:5px;padding:0 18px 12px;}
+.atab{flex:1;padding:7px 3px;text-align:center;border-radius:10px;cursor:pointer;font-size:9px;font-weight:600;border:1px solid;font-family:'Sora',sans-serif;transition:all 0.25s;}
+.dark .atab{border-color:rgba(255,255,255,0.08);color:rgba(244,246,250,0.35);background:transparent;}
+.light .atab{border-color:rgba(0,0,0,0.1);color:rgba(30,41,59,0.45);background:transparent;}
+.atab.re.on{background:rgba(0,201,177,0.15);border-color:rgba(0,201,177,0.5);color:#00C9B1;}
+.atab.su.on{background:rgba(139,92,246,0.15);border-color:rgba(139,92,246,0.5);color:#8B5CF6;}
+.atab.bz.on{background:rgba(240,180,41,0.15);border-color:rgba(240,180,41,0.5);color:#F0B429;}
+
+.ptitle{font-size:17px;font-weight:700;transition:color 0.3s;}
+.dark .ptitle{color:#F4F6FA;}
+.light .ptitle{color:#1e293b;}
+.psub{font-size:11px;transition:color 0.3s;}
+.dark .psub{color:rgba(244,246,250,0.4);}
+.light .psub{color:rgba(30,41,59,0.5);}
+
+.dcard{margin:0 18px 9px;border-radius:16px;padding:12px;cursor:pointer;border:1px solid;transition:all 0.25s;}
+.dark .dcard{background:#1a2540;border-color:rgba(255,255,255,0.07);}
+.light .dcard{background:#fff;border-color:rgba(0,0,0,0.08);}
+.dcard.hi{border-color:#00C9B1 !important;}
+.dname{font-size:12px;font-weight:700;transition:color 0.3s;}
+.dark .dname{color:#F4F6FA;}
+.light .dname{color:#1e293b;}
+.dsub{font-size:10px;line-height:1.4;transition:color 0.3s;}
+.dark .dsub{color:rgba(244,246,250,0.45);}
+.light .dsub{color:rgba(30,41,59,0.5);}
+
+.stag{display:inline-flex;align-items:center;gap:4px;padding:3px 8px;border-radius:8px;font-size:9px;font-weight:600;margin-top:5px;border:1px solid;}
+.st-re{background:rgba(0,201,177,0.12);color:#00C9B1;border-color:rgba(0,201,177,0.3);}
+.st-su{background:rgba(139,92,246,0.12);color:#8B5CF6;border-color:rgba(139,92,246,0.3);}
+.st-bz{background:rgba(240,180,41,0.12);color:#F0B429;border-color:rgba(240,180,41,0.3);}
+.sdot{width:5px;height:5px;border-radius:50%;animation:dp 1.5s infinite;}
+@keyframes dp{0%,100%{opacity:1}50%{opacity:0.3}}
+.mpill{font-size:11px;font-weight:700;padding:3px 8px;border-radius:10px;}
+.mp-re{background:rgba(0,201,177,0.12);color:#00C9B1;}
+.mp-su{background:rgba(139,92,246,0.12);color:#8B5CF6;}
+.mp-bz{background:rgba(240,180,41,0.12);color:#F0B429;}
+
+.prow{display:flex;align-items:center;gap:3px;margin-top:7px;}
+.pnode{display:flex;flex-direction:column;align-items:center;}
+.pav{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:8px;font-weight:700;}
+.pnm{font-size:7px;margin-top:2px;transition:color 0.3s;}
+.dark .pnm{color:rgba(244,246,250,0.4);}
+.light .pnm{color:rgba(30,41,59,0.5);}
+.parr{color:#00C9B1;font-size:11px;margin-bottom:10px;}
+.av-you{background:rgba(0,201,177,0.2);border:1px solid #00C9B1;color:#00C9B1;}
+.av-mid{background:rgba(240,180,41,0.12);border:1px solid rgba(240,180,41,0.4);color:#F0B429;}
+
+.av-tgt{transition:all 0.3s;}
+.dark .av-tgt{background:#243050;border:1px solid rgba(255,255,255,0.15);color:#F4F6FA;}
+.light .av-tgt{background:#dde8f4;border:1px solid rgba(0,0,0,0.12);color:#334155;}
+
+.divln{height:1px;margin:0 18px 12px;transition:background 0.3s;}
+.dark .divln{background:rgba(255,255,255,0.07);}
+.light .divln{background:rgba(0,0,0,0.07);}
+
+.mapwrap{width:100%;height:302px;position:relative;overflow:hidden;}
+@keyframes rp1{0%{r:7;opacity:0.85}100%{r:26;opacity:0}}
+@keyframes rp2{0%{r:7;opacity:0.5}100%{r:38;opacity:0}}
+.r1{animation:rp1 2.2s ease-out infinite;}
+.r2{animation:rp2 2.2s ease-out 0.55s infinite;}
+
+.ncrd{margin:0 18px 12px;border-radius:20px;border:1px solid;padding:16px;transition:all 0.3s;}
+.dark .ncrd{background:linear-gradient(135deg,#1a2540,#111827);border-color:rgba(255,255,255,0.07);}
+.light .ncrd{background:linear-gradient(135deg,#fff,#f0f4fa);border-color:rgba(0,0,0,0.08);}
+
+.btnrow{display:flex;gap:9px;}
+.btn{flex:1;padding:12px;border-radius:13px;border:none;font-family:'Sora',sans-serif;font-size:13px;font-weight:600;cursor:pointer;transition:all 0.2s;}
+.dark .btn-dec{background:rgba(255,255,255,0.05);color:rgba(244,246,250,0.4);border:1px solid rgba(255,255,255,0.08);}
+.light .btn-dec{background:rgba(0,0,0,0.05);color:rgba(30,41,59,0.45);border:1px solid rgba(0,0,0,0.1);}
+.btn-app{background:#00C9B1;color:#0B1220;}
+
+.aov{display:none;position:absolute;inset:0;z-index:200;flex-direction:column;align-items:center;justify-content:center;gap:13px;}
+.aov.on{display:flex;animation:fdi 0.3s ease;}
+@keyframes fdi{from{opacity:0}to{opacity:1}}
+.dark .aov{background:#0B1220;}
+.light .aov{background:#eef2f8;}
+.ck{width:58px;height:58px;border-radius:50%;background:rgba(0,201,177,0.12);border:2px solid #00C9B1;display:flex;align-items:center;justify-content:center;font-size:24px;animation:pi 0.5s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;}
+@keyframes pi{from{opacity:0;transform:scale(0)}to{opacity:1;transform:scale(1)}}
+.adtl{border-radius:13px;border:1px solid;padding:13px;width:278px;transition:all 0.3s;}
+.dark .adtl{background:#1a2540;border-color:rgba(255,255,255,0.07);}
+.light .adtl{background:#fff;border-color:rgba(0,0,0,0.08);}
+.ar2{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid;transition:border-color 0.3s;}
+.dark .ar2{border-color:rgba(255,255,255,0.06);}
+.light .ar2{border-color:rgba(0,0,0,0.06);}
+.ar2:last-child{border-bottom:none;}
+.ak{font-size:10px;transition:color 0.3s;}
+.dark .ak{color:rgba(244,246,250,0.4);}
+.light .ak{color:rgba(30,41,59,0.5);}
+.av2{font-size:11px;font-weight:600;transition:color 0.3s;}
+.dark .av2{color:#F4F6FA;}
+.light .av2{color:#1e293b;}
+
+.sfi{display:flex;gap:9px;padding:9px 0;border-bottom:1px solid;align-items:flex-start;transition:border-color 0.3s;}
+.dark .sfi{border-color:rgba(255,255,255,0.06);}
+.light .sfi{border-color:rgba(0,0,0,0.06);}
+.sfi-ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.sfi-t{font-size:12px;font-weight:600;transition:color 0.3s;}
+.dark .sfi-t{color:#F4F6FA;}
+.light .sfi-t{color:#1e293b;}
+.sfi-s{font-size:10px;line-height:1.4;transition:color 0.3s;}
+.dark .sfi-s{color:rgba(244,246,250,0.4);}
+.light .sfi-s{color:rgba(30,41,59,0.5);}
+.sfi-tm{font-size:9px;flex-shrink:0;transition:color 0.3s;}
+.dark .sfi-tm{color:rgba(244,246,250,0.3);}
+.light .sfi-tm{color:rgba(30,41,59,0.35);}
+
+.pwrcrd{border-radius:16px;border:1px solid;padding:14px;margin:0 18px 10px;transition:all 0.3s;}
+.dark .pwrcrd{background:linear-gradient(135deg,#1a2540,#111827);border-color:rgba(255,255,255,0.07);}
+.light .pwrcrd{background:linear-gradient(135deg,#fff,#f0f4fa);border-color:rgba(0,0,0,0.08);}
+
+.cnnrow{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid;transition:border-color 0.3s;}
+.dark .cnnrow{border-color:rgba(255,255,255,0.06);}
+.light .cnnrow{border-color:rgba(0,0,0,0.06);}
+.cnnrow:last-child{border-bottom:none;}
+.cnn-av{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;}
+.cnn-name{font-size:12px;font-weight:700;transition:color 0.3s;}
+.dark .cnn-name{color:#F4F6FA;}
+.light .cnn-name{color:#1e293b;}
+.cnn-sub{font-size:10px;transition:color 0.3s;}
+.dark .cnn-sub{color:rgba(244,246,250,0.4);}
+.light .cnn-sub{color:rgba(30,41,59,0.5);}
+
+.skbdg{display:inline-flex;align-items:center;gap:5px;padding:5px 10px;border-radius:10px;border:1px solid;margin:3px;}
+.dark .skbdg{background:#1a2540;border-color:rgba(255,255,255,0.08);}
+.light .skbdg{background:#e8edf5;border-color:rgba(0,0,0,0.1);}
+.sk-t{font-size:10px;font-weight:600;transition:color 0.3s;}
+.dark .sk-t{color:#F4F6FA;}
+.light .sk-t{color:#334155;}
+.sk-s{font-size:9px;transition:color 0.3s;}
+.dark .sk-s{color:rgba(244,246,250,0.4);}
+.light .sk-s{color:rgba(30,41,59,0.5);}
+
+.nwbar-bg{border-radius:4px;height:6px;margin-top:4px;transition:background 0.3s;}
+.dark .nwbar-bg{background:rgba(255,255,255,0.08);}
+.light .nwbar-bg{background:rgba(0,0,0,0.08);}
+
+.stcrd{border-radius:12px;border:1px solid;padding:10px 8px;text-align:center;transition:all 0.3s;}
+.dark .stcrd{background:#1a2540;border-color:rgba(255,255,255,0.07);}
+.light .stcrd{background:#fff;border-color:rgba(0,0,0,0.08);}
+
+/* Intro sub menu */
+.isubs{display:flex;gap:6px;padding:0 18px 10px;}
+.isub{flex:1;padding:8px 6px;border-radius:10px;border:1px solid;font-size:10px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;transition:all 0.25s;}
+.dark .isub{border-color:rgba(255,255,255,0.08);background:transparent;color:rgba(244,246,250,0.4);}
+.light .isub{border-color:rgba(0,0,0,0.1);background:transparent;color:rgba(30,41,59,0.45);}
+.isub.on{background:rgba(0,201,177,0.15);border-color:rgba(0,201,177,0.45);color:#00C9B1;}
+.intro-pane{display:none;}
+.intro-pane.on{display:block;}
+.cconn{margin:0 18px 9px;border-radius:14px;border:1px solid;padding:10px;transition:all 0.3s;}
+.dark .cconn{background:#1a2540;border-color:rgba(255,255,255,0.07);}
+.light .cconn{background:#fff;border-color:rgba(0,0,0,0.08);}
+.cconn-row{display:flex;align-items:center;gap:9px;}
+.cav{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.cname{font-size:12px;font-weight:700;transition:color 0.3s;}
+.dark .cname{color:#F4F6FA;}
+.light .cname{color:#1e293b;}
+.csub{font-size:10px;transition:color 0.3s;}
+.dark .csub{color:rgba(244,246,250,0.42);}
+.light .csub{color:rgba(30,41,59,0.5);}
+.ifilters{display:flex;gap:6px;padding:0 18px 10px;overflow-x:auto;}
+.ifbtn{padding:5px 12px;border-radius:20px;border:1px solid;font-size:10px;font-weight:600;cursor:pointer;font-family:'Sora',sans-serif;white-space:nowrap;transition:all 0.25s;}
+.dark .ifbtn{border-color:rgba(255,255,255,0.1);background:transparent;color:rgba(244,246,250,0.45);}
+.light .ifbtn{border-color:rgba(0,0,0,0.1);background:transparent;color:rgba(30,41,59,0.45);}
+.ifbtn.on{background:rgba(0,201,177,0.12) !important;border-color:rgba(0,201,177,0.45) !important;color:#00C9B1 !important;}
+.ilist{padding:0 18px;}
+.icard{border-radius:16px;border:1px solid;margin-bottom:9px;overflow:hidden;transition:border-color 0.3s;}
+.dark .icard{background:#1a2540;border-color:rgba(255,255,255,0.07);}
+.light .icard{background:#fff;border-color:rgba(0,0,0,0.08);}
+.icard.open{border-color:rgba(0,201,177,0.45);}
+.ihead{padding:11px;cursor:pointer;}
+.iring{display:flex;align-items:center;justify-content:center;position:relative;width:42px;height:42px;flex-shrink:0;}
+.iring svg{position:absolute;top:0;left:0;transform:rotate(-90deg);}
+.iav{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;}
+.inam{font-size:12px;font-weight:700;transition:color 0.3s;}
+.dark .inam{color:#F4F6FA;}
+.light .inam{color:#1e293b;}
+.irole{font-size:10px;transition:color 0.3s;}
+.dark .irole{color:rgba(244,246,250,0.42);}
+.light .irole{color:rgba(30,41,59,0.5);}
+.itags{display:flex;gap:4px;flex-wrap:wrap;margin-top:7px;}
+.itag{background:rgba(0,0,0,0.25);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:2px 7px;font-size:8px;font-weight:600;}
+.imutual{display:flex;align-items:center;gap:8px;margin-top:8px;}
+.idetail{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(0.4,0,0.2,1);}
+.idetail.open{max-height:420px;}
+.idetail-inner{padding:11px;border-top:1px solid;transition:border-color 0.3s;}
+.dark .idetail-inner{border-color:rgba(255,255,255,0.06);}
+.light .idetail-inner{border-color:rgba(0,0,0,0.06);}
+
+/* Aurum design-system alignment overrides (content unchanged) */
+.wp-root{
+  font-family:'Inter',sans-serif !important;
+  color:var(--ink-primary);
+}
+.wp-root.dark{
+  background:var(--bg-base) !important;
+}
+.wp-root.light{
+  background:var(--bg-base) !important;
+}
+.brand,.ptitle{
+  font-family:'Syne',sans-serif !important;
+  letter-spacing:-0.01em;
+}
+.top-note,.psub,.ni-label,.csub,.irole{
+  color:var(--ink-secondary) !important;
+}
+.theme-btn,.scr-tab,.atab,.ifbtn,.isub{
+  font-family:'Inter',sans-serif !important;
+  border-radius:6px !important;
+}
+.dark .theme-btn,.dark .scr-tab,.dark .atab,.dark .ifbtn,.dark .isub{
+  border-color:var(--border-default) !important;
+  color:var(--ink-secondary) !important;
+  background:transparent !important;
+}
+.light .theme-btn,.light .scr-tab,.light .atab,.light .ifbtn,.light .isub{
+  border-color:var(--border-default) !important;
+  color:var(--ink-secondary) !important;
+  background:transparent !important;
+}
+.scr-tab.on,.atab.re.on,.ifbtn.on,.isub.on{
+  background:var(--gold-surface) !important;
+  border-color:var(--gold-border) !important;
+  color:var(--gold) !important;
+}
+.phone{
+  border-radius:18px !important;
+}
+.dark .phone{
+  background:var(--bg-surface) !important;
+  border-color:var(--border-default) !important;
+  box-shadow:var(--shadow-panel) !important;
+}
+.light .phone{
+  background:var(--bg-surface) !important;
+  border-color:var(--border-default) !important;
+  box-shadow:var(--shadow-panel) !important;
+}
+.dark .nbar,.light .nbar{
+  background:var(--bg-elevated) !important;
+  border-color:var(--border-default) !important;
+}
+.dark .dcard,.dark .ncrd,.dark .stcrd,.dark .pwrcrd,.dark .cconn,.dark .icard{
+  background:var(--bg-surface) !important;
+  border-color:var(--border-default) !important;
+}
+.light .dcard,.light .ncrd,.light .stcrd,.light .pwrcrd,.light .cconn,.light .icard{
+  background:var(--bg-surface) !important;
+  border-color:var(--border-default) !important;
+}
+.dark .ptitle,.dark .stime,.dark .inam,.dark .cname{
+  color:var(--ink-primary) !important;
+}
+.light .ptitle,.light .stime,.light .inam,.light .cname{
+  color:var(--ink-primary) !important;
+}
+.btn-app{
+  background:var(--gold) !important;
+  color:var(--ink-inverted) !important;
+  border-color:var(--gold-border) !important;
+}
+.btn-app:hover{
+  background:var(--gold-bright) !important;
+}
+.ni.on .ni-label,.ni.on .ni-ic{
+  color:var(--gold) !important;
+  stroke:var(--gold) !important;
+}
+</style>
+
+<div class="wp-root dark" id="R">
+
+<div class="global-menu">
+  <a href="../index.html">Home</a>
+  <a href="../demand-signals.html">Demand Signals</a>
+  <a href="../executive-pitch.html">Executive Pitch</a>
+  <a href="dealnexus-product-mockup.html" class="active">Product Mockup</a>
+</div>
+
+<div class="top-bar">
+  <span class="brand">DealNexus</span>
+  <button class="theme-btn" onclick="toggleTheme()" id="TB">
+    <span id="TI">☀</span><span id="TL">Light mode</span>
+  </button>
+</div>
+<div class="top-note">LinkedIn helps you find people. DealNexus gets you introduced through trusted paths.</div>
+
+<div class="scr-tabs" id="ST">
+  <button class="scr-tab on" onclick="goScr('map',this)">Deal Map</button>
+  <button class="scr-tab" onclick="goScr('sig',this)">Signals</button>
+  <button class="scr-tab" onclick="goScr('intro',this)">Intro</button>
+  <button class="scr-tab" onclick="goScr('prof',this)">Profile</button>
+</div>
+
+<div class="phone" id="PH">
+<div class="notch"><div class="notch-dot"></div></div>
+
+<!-- ════════ MAP SCREEN ════════ -->
+<div class="scr on" id="scr-map">
+  <div class="sbar"><span class="stime">9:41</span><span style="font-size:11px;opacity:0.5;">●●●</span></div>
+  <div class="atabs" style="margin-top:4px;">
+    <button class="atab re on" id="tab-re" onclick="swAsset('re')">🏠 Real Estate</button>
+    <button class="atab su" id="tab-su" onclick="swAsset('su')">🚀 Startups</button>
+    <button class="atab bz" id="tab-bz" onclick="swAsset('bz')">🏢 Business</button>
+  </div>
+
+  <div class="mapwrap">
+    <svg width="360" height="302" viewBox="0 0 360 302" id="MSVG">
+      <defs>
+        <radialGradient id="wg" cx="50%" cy="65%"><stop offset="0%" stop-color="#0d3352" stop-opacity="0.88"/><stop offset="100%" stop-color="#071e30" stop-opacity="0.7"/></radialGradient>
+        <radialGradient id="lg_d" cx="40%" cy="40%"><stop offset="0%" stop-color="#13263d"/><stop offset="100%" stop-color="#0a1a2b"/></radialGradient>
+        <radialGradient id="lg_l" cx="40%" cy="40%"><stop offset="0%" stop-color="#c8d8e8"/><stop offset="100%" stop-color="#b0c4d8"/></radialGradient>
+      </defs>
+      <rect id="MB" width="360" height="302" fill="#13263d"/>
+      <path id="ML" d="M40,18 L320,18 L320,258 L262,264 L242,254 C237,248 232,240 227,233 C224,226 224,218 228,210 C232,202 240,197 242,190 C244,183 242,175 239,168 C236,161 232,156 230,148 C228,140 230,133 234,126 C238,119 244,114 246,107 C248,100 246,92 242,84 C238,76 232,70 226,64 L202,48 L182,38 L157,40 C150,42 142,48 137,56 C132,64 130,74 127,83 C124,92 120,100 114,106 C108,112 101,115 95,120 C89,125 84,131 80,138 L74,153 L70,168 L64,183 L58,198 L52,218 L46,238 L40,258 Z" fill="url(#lg_d)" id="ML_el"/>
+      <path id="AI" d="M198,106 C202,110 206,118 206,128 C206,140 200,150 198,160 C196,170 196,180 200,188 C204,196 210,200 210,208 L220,206 C220,198 216,192 214,184 C212,176 214,166 216,156 C218,146 220,136 218,126 C216,116 210,108 206,102 Z" fill="#162030" id="AI_el"/>
+      <ellipse id="BI" cx="295" cy="246" rx="16" ry="10" fill="#13263d"/>
+      <path d="M60,18 L200,18 M280,18 L320,18 M320,80 L320,180" stroke="rgba(255,255,255,0.04)" stroke-width="1" fill="none"/>
+      <text id="PT" x="175" y="72" font-size="8.5" fill="rgba(255,255,255,0.28)" font-family="Sora">Providence</text>
+      <text id="WT" x="268" y="157" font-size="7.5" fill="rgba(255,255,255,0.2)" font-family="Sora">Newport</text>
+      <text id="ST2" x="88" y="215" font-size="7.5" fill="rgba(255,255,255,0.2)" font-family="Sora">Warwick</text>
+      <text id="BIT" x="285" y="250" text-anchor="middle" font-size="6.5" fill="rgba(255,255,255,0.2)" font-family="Sora">Block Island</text>
+      <text id="BLT" x="186" y="162" text-anchor="middle" font-size="7.5" fill="rgba(100,180,255,0.28)" font-family="Sora" font-style="italic">Narragansett Bay</text>
+      <path d="M157,80 C162,90 164,98 160,110 C156,122 150,130 152,142 C154,154 162,157 164,167 C166,177 160,187 156,197 C152,207 150,217 154,227 C158,237 170,242 177,250 C184,258 186,267 182,277 L202,277 C207,267 212,257 222,250 C232,243 242,240 247,232 C252,224 250,214 246,207 C242,200 234,197 232,190 C230,183 234,176 237,169 C240,162 242,154 240,145 C238,136 232,130 228,122 C224,114 222,105 224,96 C226,87 232,80 232,80 Z" fill="url(#wg)" opacity="0.82"/>
+
+      <!-- RE LAYER -->
+      <g id="lyr-re">
+        <circle class="r1" cx="168" cy="88" r="7" fill="none" stroke="#00C9B1" stroke-width="1.3" stroke-opacity="0.75"/>
+        <circle class="r2" cx="168" cy="88" r="7" fill="none" stroke="#00C9B1" stroke-width="0.7" stroke-opacity="0.4"/>
+        <circle cx="168" cy="88" r="7" fill="rgba(0,201,177,0.22)" stroke="#00C9B1" stroke-width="1.5"/>
+        <text x="168" y="92" text-anchor="middle" font-size="9" fill="#00C9B1" font-family="Sora" font-weight="bold">$</text>
+        <rect x="136" y="66" width="64" height="17" rx="4" fill="rgba(6,10,18,0.9)"/>
+        <text x="168" y="78" text-anchor="middle" font-size="8" fill="#00C9B1" font-family="Sora">Flip · $185K</text>
+
+        <circle class="r1" cx="100" cy="186" r="6" fill="none" stroke="#00C9B1" stroke-width="1.2" stroke-opacity="0.65" style="animation-delay:0.8s"/>
+        <circle class="r2" cx="100" cy="186" r="6" fill="none" stroke="#00C9B1" stroke-width="0.7" stroke-opacity="0.35" style="animation-delay:1.2s"/>
+        <circle cx="100" cy="186" r="6" fill="rgba(0,201,177,0.18)" stroke="#00C9B1" stroke-width="1.3"/>
+        <text x="100" y="190" text-anchor="middle" font-size="8" fill="#00C9B1" font-family="Sora">$</text>
+        <rect x="66" y="166" width="68" height="16" rx="3" fill="rgba(6,10,18,0.9)"/>
+        <text x="100" y="177" text-anchor="middle" font-size="7.5" fill="#00C9B1" font-family="Sora">BRRRR · $210K</text>
+
+        <circle class="r1" cx="170" cy="170" r="6" fill="none" stroke="#00C9B1" stroke-width="1.2" stroke-opacity="0.6" style="animation-delay:1.4s"/>
+        <circle cx="170" cy="170" r="6" fill="rgba(0,201,177,0.18)" stroke="#00C9B1" stroke-width="1.3"/>
+        <text x="170" y="174" text-anchor="middle" font-size="8" fill="#00C9B1" font-family="Sora">$</text>
+        <rect x="130" y="152" width="80" height="16" rx="3" fill="rgba(6,10,18,0.9)"/>
+        <text x="170" y="163" text-anchor="middle" font-size="7.5" fill="#00C9B1" font-family="Sora">Syndication · $1.8M</text>
+
+        <circle class="r1" cx="262" cy="172" r="5" fill="none" stroke="#00C9B1" stroke-width="1" stroke-opacity="0.55" style="animation-delay:0.4s"/>
+        <circle cx="262" cy="172" r="5" fill="rgba(0,201,177,0.15)" stroke="#00C9B1" stroke-width="1.2"/>
+        <text x="262" y="176" text-anchor="middle" font-size="7.5" fill="#00C9B1" font-family="Sora">$</text>
+        <rect x="228" y="155" width="68" height="15" rx="3" fill="rgba(6,10,18,0.9)"/>
+        <text x="262" y="166" text-anchor="middle" font-size="7.5" fill="#00C9B1" font-family="Sora">Luxury · $3.2M</text>
+
+        <circle cx="172" cy="112" r="5" fill="#00C9B1" fill-opacity="0.9"/>
+        <circle cx="172" cy="112" r="9" fill="none" stroke="#00C9B1" stroke-width="0.8" stroke-opacity="0.45"/>
+        <text x="184" y="115" font-size="7.5" fill="#00C9B1" font-family="Sora">You</text>
+        <line x1="172" y1="117" x2="168" y2="82" stroke="#00C9B1" stroke-width="0.6" stroke-opacity="0.2" stroke-dasharray="4,4"/>
+        <line x1="172" y1="117" x2="100" y2="180" stroke="#00C9B1" stroke-width="0.6" stroke-opacity="0.2" stroke-dasharray="4,4"/>
+        <line x1="172" y1="117" x2="170" y2="164" stroke="#00C9B1" stroke-width="0.6" stroke-opacity="0.2" stroke-dasharray="4,4"/>
+
+        <rect x="12" y="278" width="148" height="20" rx="5" fill="rgba(6,10,18,0.78)"/>
+        <circle cx="23" cy="288" r="4" fill="rgba(0,201,177,0.3)" stroke="#00C9B1" stroke-width="1"/>
+        <text x="31" y="292" font-size="7.5" fill="rgba(255,255,255,0.5)" font-family="Sora">Pulse = live RE deal</text>
+      </g>
+
+      <!-- STARTUP LAYER -->
+      <g id="lyr-su" display="none">
+        <circle class="r1" cx="168" cy="88" r="7" fill="none" stroke="#8B5CF6" stroke-width="1.3" stroke-opacity="0.75"/>
+        <circle class="r2" cx="168" cy="88" r="7" fill="none" stroke="#8B5CF6" stroke-width="0.7" stroke-opacity="0.4"/>
+        <circle cx="168" cy="88" r="7" fill="rgba(139,92,246,0.22)" stroke="#8B5CF6" stroke-width="1.5"/>
+        <text x="168" y="92" text-anchor="middle" font-size="9" fill="#8B5CF6" font-family="Sora">▲</text>
+        <rect x="132" y="66" width="72" height="17" rx="4" fill="rgba(6,10,18,0.9)"/>
+        <text x="168" y="78" text-anchor="middle" font-size="8" fill="#8B5CF6" font-family="Sora">PropTech · $500K</text>
+
+        <circle class="r1" cx="238" cy="142" r="6" fill="none" stroke="#8B5CF6" stroke-width="1" stroke-opacity="0.6" style="animation-delay:1s"/>
+        <circle cx="238" cy="142" r="6" fill="rgba(139,92,246,0.18)" stroke="#8B5CF6" stroke-width="1.3"/>
+        <text x="238" y="146" text-anchor="middle" font-size="8" fill="#8B5CF6" font-family="Sora">▲</text>
+        <rect x="204" y="124" width="68" height="16" rx="3" fill="rgba(6,10,18,0.9)"/>
+        <text x="238" y="135" text-anchor="middle" font-size="7.5" fill="#8B5CF6" font-family="Sora">CleanTech · $1.2M</text>
+
+        <circle cx="172" cy="112" r="5" fill="#8B5CF6" fill-opacity="0.9"/>
+        <circle cx="172" cy="112" r="9" fill="none" stroke="#8B5CF6" stroke-width="0.8" stroke-opacity="0.45"/>
+        <text x="184" y="115" font-size="7.5" fill="#8B5CF6" font-family="Sora">You</text>
+        <rect x="12" y="278" width="162" height="20" rx="5" fill="rgba(6,10,18,0.78)"/>
+        <circle cx="23" cy="288" r="4" fill="rgba(139,92,246,0.3)" stroke="#8B5CF6" stroke-width="1"/>
+        <text x="31" y="292" font-size="7.5" fill="rgba(255,255,255,0.5)" font-family="Sora">Pulse = active startup raise</text>
+      </g>
+
+      <!-- BIZ LAYER -->
+      <g id="lyr-bz" display="none">
+        <circle class="r1" cx="168" cy="88" r="7" fill="none" stroke="#F0B429" stroke-width="1.3" stroke-opacity="0.75"/>
+        <circle class="r2" cx="168" cy="88" r="7" fill="none" stroke="#F0B429" stroke-width="0.7" stroke-opacity="0.4"/>
+        <circle cx="168" cy="88" r="7" fill="rgba(240,180,41,0.22)" stroke="#F0B429" stroke-width="1.5"/>
+        <text x="168" y="92" text-anchor="middle" font-size="9" fill="#F0B429" font-family="Sora">B</text>
+        <rect x="136" y="66" width="64" height="17" rx="4" fill="rgba(6,10,18,0.9)"/>
+        <text x="168" y="78" text-anchor="middle" font-size="7.5" fill="#F0B429" font-family="Sora">Franchise · $2.8M</text>
+
+        <circle class="r1" cx="108" cy="198" r="6" fill="none" stroke="#F0B429" stroke-width="1" stroke-opacity="0.6" style="animation-delay:1.1s"/>
+        <circle cx="108" cy="198" r="6" fill="rgba(240,180,41,0.18)" stroke="#F0B429" stroke-width="1.3"/>
+        <text x="108" y="202" text-anchor="middle" font-size="8" fill="#F0B429" font-family="Sora">B</text>
+        <rect x="74" y="181" width="68" height="15" rx="3" fill="rgba(6,10,18,0.9)"/>
+        <text x="108" y="191" text-anchor="middle" font-size="7.5" fill="#F0B429" font-family="Sora">Auto shop · $680K</text>
+
+        <circle cx="172" cy="112" r="5" fill="#F0B429" fill-opacity="0.9"/>
+        <circle cx="172" cy="112" r="9" fill="none" stroke="#F0B429" stroke-width="0.8" stroke-opacity="0.45"/>
+        <text x="184" y="115" font-size="7.5" fill="#F0B429" font-family="Sora">You</text>
+        <rect x="12" y="278" width="158" height="20" rx="5" fill="rgba(6,10,18,0.78)"/>
+        <circle cx="23" cy="288" r="4" fill="rgba(240,180,41,0.3)" stroke="#F0B429" stroke-width="1"/>
+        <text x="31" y="292" font-size="7.5" fill="rgba(255,255,255,0.5)" font-family="Sora">Pulse = active biz sale</text>
+      </g>
+    </svg>
+  </div>
+
+  <div style="padding:8px 18px 4px;display:flex;justify-content:space-between;align-items:center;">
+    <span class="psub" style="font-size:10px;letter-spacing:1px;text-transform:uppercase;" id="DLL">RE deals · Rhode Island</span>
+    <span style="font-size:10px;color:#00C9B1;cursor:pointer;">Filter ▾</span>
+  </div>
+
+  <div id="dl-re">
+    <div class="dcard hi">
+      <div style="display:flex;align-items:flex-start;gap:9px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,201,177,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🏠</div>
+        <div style="flex:1;">
+          <div class="dname">3BR Flip — Providence, RI</div>
+          <div class="dsub">$185K · 11% interest · 8-mo term · ARV $320K</div>
+          <span class="stag st-re"><span class="sdot" style="background:#00C9B1;"></span>Live · closes 8 days</span>
+        </div>
+        <span class="mpill mp-re">97%</span>
+      </div>
+      <div class="prow">
+        <div class="pnode"><div class="pav av-you">You</div><div class="pnm">Marcus</div></div>
+        <div class="parr">→</div>
+        <div class="pnode"><div class="pav av-mid">MK</div><div class="pnm">Mike K</div></div>
+        <div class="parr">→</div>
+        <div class="pnode"><div class="pav av-tgt">DV</div><div class="pnm">Dave V</div></div>
+        <span style="margin-left:auto;font-size:9px;color:#00C9B1;">2 hops</span>
+      </div>
+    </div>
+    <div class="dcard">
+      <div style="display:flex;align-items:flex-start;gap:9px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(0,201,177,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🏗</div>
+        <div style="flex:1;"><div class="dname">Multifamily Syndication — Warwick</div><div class="dsub">$1.8M · 7.5% pref · 5-yr hold · 55% filled</div><span class="stag st-re"><span class="sdot" style="background:#00C9B1;"></span>New syndication</span></div>
+        <span class="mpill mp-re">84%</span>
+      </div>
+    </div>
+  </div>
+  <div id="dl-su" style="display:none;">
+    <div class="dcard hi" style="border-color:rgba(139,92,246,0.5) !important;">
+      <div style="display:flex;align-items:flex-start;gap:9px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(139,92,246,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🚀</div>
+        <div style="flex:1;"><div class="dname">PropTech SaaS — Providence, RI</div><div class="dsub">$500K SAFE · $3.2M cap · 19% MoM · YC alumni</div><span class="stag st-su"><span class="sdot" style="background:#8B5CF6;"></span>Raising · 4 investors in</span></div>
+        <span class="mpill mp-su">92%</span>
+      </div>
+      <div class="prow">
+        <div class="pnode"><div class="pav av-you">You</div><div class="pnm">Marcus</div></div>
+        <div class="parr" style="color:#8B5CF6;">→</div>
+        <div class="pnode"><div class="pav" style="background:rgba(139,92,246,0.15);border:1px solid rgba(139,92,246,0.4);color:#8B5CF6;">JR</div><div class="pnm">Joe R</div></div>
+        <div class="parr" style="color:#8B5CF6;">→</div>
+        <div class="pnode"><div class="pav av-tgt">AL</div><div class="pnm">Ana L</div></div>
+        <span style="margin-left:auto;font-size:9px;color:#8B5CF6;">2 hops</span>
+      </div>
+    </div>
+  </div>
+  <div id="dl-bz" style="display:none;">
+    <div class="dcard hi" style="border-color:rgba(240,180,41,0.5) !important;">
+      <div style="display:flex;align-items:flex-start;gap:9px;">
+        <div style="width:36px;height:36px;border-radius:10px;background:rgba(240,180,41,0.12);display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;">🏢</div>
+        <div style="flex:1;"><div class="dname">Regional Franchise — Providence</div><div class="dsub">$2.8M asking · $510K EBITDA · 5.5x multiple</div><span class="stag st-bz"><span class="sdot" style="background:#F0B429;"></span>Motivated seller · 30 days</span></div>
+        <span class="mpill mp-bz">89%</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="nbar">
+    <div class="ni on" onclick="goScr('map',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><div class="ni-label">Map</div><div class="ndot"></div></div>
+    <div class="ni" onclick="goScr('sig',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="ni-label">Signals</div></div>
+    <div class="ni" onclick="goScr('intro',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><div class="ni-label">Intro</div></div>
+    <div class="ni" onclick="goScr('prof',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="ni-label">Profile</div></div>
+  </div>
+</div>
+
+<!-- ════════ SIGNALS SCREEN ════════ -->
+<div class="scr" id="scr-sig">
+  <div class="sbar"><span class="stime">9:41</span></div>
+  <div style="padding:4px 18px 12px;"><div class="ptitle" style="font-size:17px;">Intent signals</div><div class="psub">AI-detected · your 3-degree network · RI</div></div>
+  <div style="display:flex;gap:6px;padding:0 18px 12px;overflow-x:auto;">
+    <span class="stag st-re" style="white-space:nowrap;"><span class="sdot" style="background:#00C9B1;"></span>All live</span>
+    <span style="border-radius:20px;padding:3px 10px;font-size:10px;white-space:nowrap;border:1px solid rgba(255,255,255,0.1);color:rgba(244,246,250,0.4);">🏠 RE</span>
+    <span style="border-radius:20px;padding:3px 10px;font-size:10px;white-space:nowrap;border:1px solid rgba(255,255,255,0.1);color:rgba(244,246,250,0.4);">🚀 Startup</span>
+  </div>
+  <div style="padding:0 18px;">
+    <div class="sfi"><div class="sfi-ic" style="background:rgba(0,201,177,0.12);">🏠</div><div style="flex:1;"><div class="sfi-t">Dave Vargas listed flip deal · Providence</div><div class="sfi-s">$185K private lender needed · 8 days — via Mike K (2 hops)</div><span class="stag st-re" style="margin-top:4px;"><span class="sdot" style="background:#00C9B1;"></span>New deal</span></div><div class="sfi-tm">2m ago</div></div>
+    <div class="sfi"><div class="sfi-ic" style="background:rgba(139,92,246,0.12);">🚀</div><div style="flex:1;"><div class="sfi-t">Ana Li opened PropTech seed round</div><div class="sfi-s">$500K SAFE · $3.2M cap · YC alumni — via Joe R (2 hops)</div><span class="stag st-su" style="margin-top:4px;"><span class="sdot" style="background:#8B5CF6;"></span>Raising now</span></div><div class="sfi-tm">18m</div></div>
+    <div class="sfi"><div class="sfi-ic" style="background:rgba(240,180,41,0.12);">💼</div><div style="flex:1;"><div class="sfi-t">Ron Bauer listed franchise · Cranston RI</div><div class="sfi-s">$2.8M · $510K EBITDA — via Tara W (2 hops)</div><span class="stag st-bz" style="margin-top:4px;"><span class="sdot" style="background:#F0B429;"></span>For sale</span></div><div class="sfi-tm">1h</div></div>
+    <div class="sfi" style="border-bottom:none;"><div class="sfi-ic" style="background:rgba(255,107,107,0.12);">📊</div><div style="flex:1;"><div class="sfi-t">Cade Morrow changed role to LP Investor</div><div class="sfi-s">Ex-operator, now deploying capital in RI/MA</div><span class="stag" style="background:rgba(255,107,107,0.1);color:#FF6B6B;border:1px solid rgba(255,107,107,0.25);margin-top:4px;font-size:9px;padding:3px 8px;border-radius:8px;display:inline-flex;align-items:center;gap:4px;"><span class="sdot" style="background:#FF6B6B;"></span>Role change</span></div><div class="sfi-tm">3h</div></div>
+  </div>
+  <div style="margin:10px 18px;border-radius:13px;border:1px solid rgba(0,201,177,0.2);padding:11px;background:rgba(0,201,177,0.06);">
+    <div style="font-size:11px;font-weight:600;color:#00C9B1;margin-bottom:3px;">✦ AI signal radar · Rhode Island</div>
+    <div class="psub" style="font-size:10px;line-height:1.6;">Scanning LinkedIn, AngelList &amp; local deal networks for 15+ intent triggers in your 3-degree trust graph.</div>
+  </div>
+  <div class="nbar">
+    <div class="ni" onclick="goScr('map',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><div class="ni-label">Map</div></div>
+    <div class="ni on" onclick="goScr('sig',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="ni-label">Signals</div><div class="ndot"></div></div>
+    <div class="ni" onclick="goScr('intro',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><div class="ni-label">Intro</div></div>
+    <div class="ni" onclick="goScr('prof',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="ni-label">Profile</div></div>
+  </div>
+</div>
+
+<!-- ════════ INTRO SCREEN ════════ -->
+<div class="scr" id="scr-intro">
+  <div class="sbar"><span class="stime">9:41</span></div>
+  <div style="padding:4px 18px 13px;"><div class="ptitle" style="font-size:16px;">Intro request</div><div class="psub">Marcus needs you → Dave V</div></div>
+  <div class="isubs">
+    <button class="isub on" id="isub-request" onclick="swIntroPane('request')">Request</button>
+    <button class="isub" id="isub-connections" onclick="swIntroPane('connections')">Connections</button>
+  </div>
+
+  <div class="intro-pane on" id="ip-request">
+  <div class="ncrd">
+    <div class="psub" style="font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:11px;">from Marcus Rivera</div>
+    <div style="display:flex;gap:11px;margin-bottom:11px;">
+      <div style="width:42px;height:42px;border-radius:50%;background:rgba(0,201,177,0.15);border:1.5px solid rgba(0,201,177,0.45);color:#00C9B1;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0;">MR</div>
+      <div>
+        <div class="dname" style="font-size:14px;">Marcus Rivera</div>
+        <div class="psub" style="font-size:10px;">House Flipper · 47 deals · Providence RI</div>
+        <div style="font-size:11px;margin-top:7px;line-height:1.6;border-left:2px solid #00C9B1;padding:6px 9px;border-radius:0 8px 8px 0;background:rgba(0,0,0,0.18);color:rgba(244,246,250,0.7);">"Need a lender for $185K flip in Providence — 30 days. Connect me with Dave? Deal memo attached."</div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:8px;padding:9px;background:rgba(0,0,0,0.18);border-radius:10px;margin-bottom:11px;">
+      <div class="pnode"><div class="pav av-you" style="width:32px;height:32px;font-size:9px;">MR</div><div class="pnm">Marcus</div></div>
+      <div class="parr" style="font-size:14px;">→</div>
+      <div class="pnode"><div class="pav av-mid" style="width:32px;height:32px;font-size:9px;">MK</div><div class="pnm">Mike (you)</div></div>
+      <div class="parr" style="font-size:14px;">→</div>
+      <div class="pnode"><div class="pav av-tgt" style="width:32px;height:32px;font-size:9px;">DV</div><div class="pnm">Dave V</div></div>
+    </div>
+    <div class="btnrow">
+      <button class="btn btn-dec" onclick="goScr('map',null)">Decline</button>
+      <button class="btn btn-app" onclick="doApprove()">Approve ✓</button>
+    </div>
+  </div>
+  <div style="margin:0 18px;border-radius:13px;border:1px solid;padding:12px;transition:all 0.3s;" id="DS">
+    <div class="psub" style="font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:9px;">Deal snapshot</div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:7px;">
+      <div><div class="psub" style="font-size:9px;">Loan</div><div class="dname">$185,000</div></div>
+      <div><div class="psub" style="font-size:9px;">Timeline</div><div class="dname">30 days</div></div>
+      <div><div class="psub" style="font-size:9px;">Location</div><div class="dname">Providence, RI</div></div>
+      <div><div class="psub" style="font-size:9px;">Record</div><div class="dname" style="color:#00C9B1;">47 deals · 0 default</div></div>
+    </div>
+  </div>
+  </div>
+
+  <div class="intro-pane" id="ip-connections">
+    <div style="padding:0 18px 10px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">
+        <div class="stcrd"><div style="font-size:16px;font-weight:700;color:#00C9B1;">142</div><div class="psub" style="font-size:8px;">Connections</div></div>
+        <div class="stcrd"><div style="font-size:16px;font-weight:700;color:#8B5CF6;">38</div><div class="psub" style="font-size:8px;">2nd degree</div></div>
+        <div class="stcrd"><div style="font-size:16px;font-weight:700;color:#F0B429;">94</div><div class="psub" style="font-size:8px;">Power index</div></div>
+      </div>
+    </div>
+    <div class="ifilters">
+      <button class="ifbtn on" id="if-all" onclick="filterIntroConnections('all', this)">All</button>
+      <button class="ifbtn" id="if-lender" onclick="filterIntroConnections('lender', this)">Lenders</button>
+      <button class="ifbtn" id="if-angel" onclick="filterIntroConnections('angel', this)">Angels</button>
+    </div>
+    <div class="ilist" id="intro-connections-list"></div>
+    <div style="margin:0 18px;border-radius:12px;border:1px solid rgba(0,201,177,0.2);padding:10px;background:rgba(0,201,177,0.06);">
+      <div style="font-size:10px;color:#00C9B1;font-weight:600;margin-bottom:4px;">✦ Intro-aware connection scoring</div>
+      <div class="psub" style="font-size:9px;line-height:1.5;">Ranking accounts by trust strength, mutual depth, and historical intro outcomes.</div>
+    </div>
+  </div>
+
+  <div class="aov" id="AOV">
+    <div class="ck">✓</div>
+    <div class="ptitle" style="font-size:16px;">Intro sent!</div>
+    <div class="psub" style="text-align:center;padding:0 30px;line-height:1.6;font-size:12px;">Dave Vargas notified with your endorsement and full context.</div>
+    <div class="adtl">
+      <div class="ar2"><span class="ak">Status</span><span class="av2" style="color:#00C9B1;">Delivered</span></div>
+      <div class="ar2"><span class="ak">Est. response</span><span class="av2">2–4 hours</span></div>
+      <div class="ar2"><span class="ak">Trust score</span><span class="av2" style="color:#00C9B1;">94 → +2 pts</span></div>
+    </div>
+    <button class="btn btn-app" style="width:230px;" onclick="closeApprove()">Back to map</button>
+  </div>
+  <div class="nbar">
+    <div class="ni" onclick="goScr('map',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><div class="ni-label">Map</div></div>
+    <div class="ni" onclick="goScr('sig',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="ni-label">Signals</div></div>
+    <div class="ni on" onclick="goScr('intro',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><div class="ni-label">Intro</div><div class="ndot"></div></div>
+    <div class="ni" onclick="goScr('prof',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="ni-label">Profile</div></div>
+  </div>
+</div>
+
+<!-- ════════ PROFILE SCREEN ════════ -->
+<div class="scr" id="scr-prof">
+  <div class="sbar"><span class="stime">9:41</span></div>
+
+  <!-- Hero -->
+  <div style="padding:4px 18px 10px;text-align:center;">
+    <div style="width:62px;height:62px;border-radius:50%;background:rgba(0,201,177,0.12);border:2px solid #00C9B1;display:flex;align-items:center;justify-content:center;font-size:21px;font-weight:700;color:#00C9B1;margin:0 auto 8px;">MR</div>
+    <div class="ptitle" style="font-size:16px;">Marcus Rivera</div>
+    <div class="psub" style="font-size:11px;">House Flipper · Lender · Angel Investor</div>
+    <div style="display:inline-flex;align-items:center;gap:5px;background:rgba(240,180,41,0.12);border:1px solid rgba(240,180,41,0.35);border-radius:20px;padding:3px 11px;margin-top:6px;">
+      <span style="width:5px;height:5px;border-radius:50%;background:#F0B429;"></span>
+      <span style="font-size:10px;color:#F0B429;font-weight:600;">Trust Score 94 · Top 5% in RI</span>
+    </div>
+  </div>
+
+  <!-- Power stats (3 cards) -->
+  <div style="padding:0 18px 10px;">
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:7px;">
+      <div class="stcrd"><div style="font-size:17px;font-weight:700;color:#00C9B1;">$24.1M</div><div class="psub" style="font-size:9px;margin-top:2px;">Network NW</div></div>
+      <div class="stcrd"><div style="font-size:17px;font-weight:700;color:#8B5CF6;">142</div><div class="psub" style="font-size:9px;margin-top:2px;">Connections</div></div>
+      <div class="stcrd"><div style="font-size:17px;font-weight:700;color:#F0B429;">94</div><div class="psub" style="font-size:9px;margin-top:2px;">Power index</div></div>
+    </div>
+  </div>
+
+  <!-- Connection power (net worth per person) -->
+  <div class="pwrcrd">
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:11px;">
+      <div class="ptitle" style="font-size:13px;">Connection power</div>
+      <span style="font-size:9px;background:rgba(139,92,246,0.15);color:#8B5CF6;padding:2px 8px;border-radius:8px;font-weight:600;border:1px solid rgba(139,92,246,0.3);">Top network</span>
+    </div>
+    <div class="cnnrow">
+      <div class="cnn-av" style="background:rgba(240,180,41,0.15);color:#F0B429;">DV</div>
+      <div style="flex:1;">
+        <div class="cnn-name">Dave Vargas</div>
+        <div class="cnn-sub">Hard money lender · 120 deals closed</div>
+        <span class="stag st-re" style="font-size:8px;padding:2px 6px;">RE lender</span>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px;font-weight:700;color:#F0B429;">$1.8M</div>
+        <div class="psub" style="font-size:8px;">est. NW</div>
+      </div>
+    </div>
+    <div class="cnnrow">
+      <div class="cnn-av" style="background:rgba(139,92,246,0.15);color:#8B5CF6;">MK</div>
+      <div style="flex:1;">
+        <div class="cnn-name">Mike Kim</div>
+        <div class="cnn-sub">Syndicator · 38 LPs · $12M raised</div>
+        <span class="stag st-su" style="font-size:8px;padding:2px 6px;">Syndicator</span>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px;font-weight:700;color:#8B5CF6;">$2.4M</div>
+        <div class="psub" style="font-size:8px;">est. NW</div>
+      </div>
+    </div>
+    <div class="cnnrow" style="border-bottom:none;">
+      <div class="cnn-av" style="background:rgba(0,201,177,0.15);color:#00C9B1;">SL</div>
+      <div style="flex:1;">
+        <div class="cnn-name">Sara Lin</div>
+        <div class="cnn-sub">Angel investor · 12 startups · 3 exits</div>
+        <span class="stag st-su" style="font-size:8px;padding:2px 6px;">Angel</span>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:12px;font-weight:700;color:#00C9B1;">$5.1M</div>
+        <div class="psub" style="font-size:8px;">est. NW</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- What I'm good at -->
+  <div style="padding:0 18px;margin-bottom:10px;">
+    <div class="psub" style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;">What I'm known for</div>
+    <div style="display:flex;flex-wrap:wrap;">
+      <div class="skbdg"><span style="font-size:13px;">🏠</span><div><div class="sk-t">Fix &amp; flip</div><div class="sk-s">47 deals · top 2% RI</div></div></div>
+      <div class="skbdg"><span style="font-size:13px;">💰</span><div><div class="sk-t">Capital raising</div><div class="sk-s">$8.4M raised</div></div></div>
+      <div class="skbdg"><span style="font-size:13px;">🤝</span><div><div class="sk-t">Warm intros</div><div class="sk-s">24 given · 96% success</div></div></div>
+      <div class="skbdg"><span style="font-size:13px;">📊</span><div><div class="sk-t">Underwriting</div><div class="sk-s">Expert · RI market</div></div></div>
+    </div>
+  </div>
+
+  <!-- NW breakdown bars -->
+  <div style="padding:0 18px;margin-bottom:80px;">
+    <div class="psub" style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px;">Network wealth breakdown</div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span class="psub" style="font-size:10px;">Lenders &amp; LPs</span><span style="font-size:10px;font-weight:600;color:#8B5CF6;">$14.8M</span></div><div class="nwbar-bg"><div style="width:100%;height:6px;border-radius:4px;background:#8B5CF6;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span class="psub" style="font-size:10px;">RE operators</span><span style="font-size:10px;font-weight:600;color:#00C9B1;">$6.2M</span></div><div class="nwbar-bg"><div style="width:42%;height:6px;border-radius:4px;background:#00C9B1;"></div></div></div>
+      <div><div style="display:flex;justify-content:space-between;margin-bottom:3px;"><span class="psub" style="font-size:10px;">Startup founders</span><span style="font-size:10px;font-weight:600;color:#F0B429;">$3.1M</span></div><div class="nwbar-bg"><div style="width:21%;height:6px;border-radius:4px;background:#F0B429;"></div></div></div>
+    </div>
+  </div>
+
+  <div class="nbar">
+    <div class="ni" onclick="goScr('map',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg><div class="ni-label">Map</div></div>
+    <div class="ni" onclick="goScr('sig',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><div class="ni-label">Signals</div></div>
+    <div class="ni" onclick="goScr('intro',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg><div class="ni-label">Intro</div></div>
+    <div class="ni on" onclick="goScr('prof',null)"><svg class="ni-ic" viewBox="0 0 24 24" fill="none" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg><div class="ni-label">Profile</div><div class="ndot"></div></div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<script>
+const root=document.getElementById('R');
+const ph=document.getElementById('PH');
+let dark=(localStorage.getItem('theme') || 'dark') === 'dark', cur='map';
+let introActiveFilter='all';
+let introExpandedId=null;
+const introConnections = [
+  {id:'dv', initials:'DV', name:'Dave Vargas', role:'Hard money lender · Providence, RI', type:'lender', nw:'$1.8M', power:91, mutual:6, trust:89, intros:18, deals:120, color:'#F0B429', tags:['RE lender','Fix & flip','Hard money'], bio:'120 deals closed · avg close 12 days · 0 defaults'},
+  {id:'mk', initials:'MK', name:'Mike Kim', role:'Syndicator & LP · Boston, MA', type:'lender', nw:'$2.4M', power:87, mutual:9, trust:92, intros:24, deals:38, color:'#8B5CF6', tags:['Syndicator','LP network','$12M raised'], bio:'38 syndications · 200+ LP relationships · strong RI connector'},
+  {id:'sl', initials:'SL', name:'Sara Lin', role:'Angel investor · Providence, RI', type:'angel', nw:'$5.1M', power:96, mutual:12, trust:97, intros:31, deals:12, color:'#00C9B1', tags:['Angel','PropTech','3 exits'], bio:'12 angel bets · 3 exits · active in RE-adjacent SaaS'},
+  {id:'cm', initials:'CM', name:'Cade Morrow', role:'LP investor · Providence, RI', type:'angel', nw:'$780K', power:62, mutual:2, trust:71, intros:4, deals:8, color:'#8B5CF6', tags:['LP','Ex-operator','New capital'], bio:'Recently shifted from operator to LP; actively deploying fresh capital'}
+];
+
+function applyTheme(){
+  document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+  localStorage.setItem('theme', dark ? 'dark' : 'light');
+  if(dark){
+    root.className='wp-root dark';
+    document.getElementById('TI').textContent='☀';
+    document.getElementById('TL').textContent='Light mode';
+    document.getElementById('MB').setAttribute('fill','#13263d');
+    document.getElementById('ML_el').setAttribute('fill','url(#lg_d)');
+    document.getElementById('AI_el').setAttribute('fill','#162030');
+    document.getElementById('BI').setAttribute('fill','#13263d');
+    document.getElementById('PT').setAttribute('fill','rgba(255,255,255,0.28)');
+    document.getElementById('WT').setAttribute('fill','rgba(255,255,255,0.2)');
+    document.getElementById('ST2').setAttribute('fill','rgba(255,255,255,0.2)');
+    document.getElementById('BIT').setAttribute('fill','rgba(255,255,255,0.2)');
+    document.getElementById('BLT').setAttribute('fill','rgba(100,180,255,0.28)');
+    document.getElementById('DS').style.background='#1a2540';
+    document.getElementById('DS').style.borderColor='rgba(255,255,255,0.07)';
+  } else {
+    root.className='wp-root light';
+    document.getElementById('TI').textContent='◑';
+    document.getElementById('TL').textContent='Dark mode';
+    document.getElementById('MB').setAttribute('fill','#b8cad9');
+    document.getElementById('ML_el').setAttribute('fill','url(#lg_l)');
+    document.getElementById('AI_el').setAttribute('fill','#c0d0df');
+    document.getElementById('BI').setAttribute('fill','#ccdce8');
+    document.getElementById('PT').setAttribute('fill','rgba(30,41,59,0.55)');
+    document.getElementById('WT').setAttribute('fill','rgba(30,41,59,0.45)');
+    document.getElementById('ST2').setAttribute('fill','rgba(30,41,59,0.45)');
+    document.getElementById('BIT').setAttribute('fill','rgba(30,41,59,0.45)');
+    document.getElementById('BLT').setAttribute('fill','rgba(14,90,140,0.4)');
+    document.getElementById('DS').style.background='#ffffff';
+    document.getElementById('DS').style.borderColor='rgba(0,0,0,0.08)';
+  }
+}
+
+function toggleTheme(){dark=!dark;applyTheme();}
+
+function introRing(pct,color){
+  const r=18,c=2*Math.PI*r,d=(pct/100)*c;
+  return `<svg width="42" height="42" viewBox="0 0 42 42"><circle cx="21" cy="21" r="18" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="2.8"></circle><circle cx="21" cy="21" r="18" fill="none" stroke="${color}" stroke-width="2.8" stroke-dasharray="${d} ${c}" stroke-linecap="round"></circle></svg>`;
+}
+
+function renderIntroConnections(){
+  const list=document.getElementById('intro-connections-list');
+  if(!list)return;
+  const rows=introActiveFilter==='all' ? introConnections : introConnections.filter(c=>c.type===introActiveFilter);
+  list.innerHTML = rows.map(c=>{
+    const open=introExpandedId===c.id;
+    return `
+      <div class="icard ${open?'open':''}">
+        <div class="ihead" onclick="toggleIntroConnection('${c.id}')">
+          <div style="display:flex;align-items:center;gap:9px;">
+            <div class="iring">${introRing(c.power,c.color)}<div class="iav" style="background:${c.color}22;color:${c.color};">${c.initials}</div></div>
+            <div style="flex:1;">
+              <div style="display:flex;justify-content:space-between;align-items:center;">
+                <div class="inam">${c.name}</div>
+                <div style="font-size:11px;font-weight:700;color:${c.color};">${c.nw}</div>
+              </div>
+              <div class="irole">${c.role}</div>
+              <div class="itags">${c.tags.map(t=>`<span class="itag" style="color:${c.color};">${t}</span>`).join('')}</div>
+              <div class="imutual">
+                <span class="psub" style="font-size:9px;">${c.mutual} mutuals</span>
+                <span style="margin-left:auto;font-size:9px;color:${c.color};font-weight:600;">Power ${c.power}</span>
+              </div>
+            </div>
+            <div style="font-size:14px;color:rgba(244,246,250,0.35);transform:rotate(${open?90:0}deg);transition:transform .25s;">›</div>
+          </div>
+        </div>
+        <div class="idetail ${open?'open':''}">
+          <div class="idetail-inner">
+            <div class="psub" style="font-size:9px;letter-spacing:1px;text-transform:uppercase;margin-bottom:6px;">Connection profile</div>
+            <div class="psub" style="font-size:10px;line-height:1.6;margin-bottom:8px;">${c.bio}</div>
+            <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;">
+              <div class="stcrd"><div style="font-size:13px;font-weight:700;color:${c.color};">${c.deals}</div><div class="psub" style="font-size:8px;">Deals</div></div>
+              <div class="stcrd"><div style="font-size:13px;font-weight:700;color:#00C9B1;">${c.intros}</div><div class="psub" style="font-size:8px;">Intros</div></div>
+              <div class="stcrd"><div style="font-size:13px;font-weight:700;color:${c.color};">${c.trust}</div><div class="psub" style="font-size:8px;">Trust</div></div>
+            </div>
+            <button class="btn btn-app" style="width:100%;margin-top:8px;padding:10px;font-size:11px;" onclick="event.stopPropagation();">Request intro via ${c.name.split(' ')[0]} →</button>
+          </div>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function toggleIntroConnection(id){
+  introExpandedId = introExpandedId===id ? null : id;
+  renderIntroConnections();
+}
+
+function filterIntroConnections(type,el){
+  introActiveFilter=type;
+  introExpandedId=null;
+  document.querySelectorAll('.ifbtn').forEach(b=>b.classList.remove('on'));
+  if(el)el.classList.add('on');
+  renderIntroConnections();
+}
+
+function goScr(id,tabEl){
+  if(cur===id)return;
+  const o=document.getElementById('scr-'+cur);
+  const n=document.getElementById('scr-'+id);
+  o.classList.remove('on');o.classList.add('out');
+  setTimeout(()=>o.classList.remove('out'),420);
+  n.classList.add('on');cur=id;
+  document.querySelectorAll('.scr-tab').forEach(t=>t.classList.remove('on'));
+  ['map','sig','intro','prof'].forEach((s,i)=>{if(s===id)document.querySelectorAll('.scr-tab')[i].classList.add('on');});
+}
+
+function swAsset(t){
+  ['re','su','bz'].forEach(x=>{
+    document.getElementById('tab-'+x).classList.remove('on');
+    document.getElementById('lyr-'+x).setAttribute('display','none');
+    document.getElementById('dl-'+x).style.display='none';
+  });
+  document.getElementById('tab-'+t).classList.add('on');
+  document.getElementById('lyr-'+t).setAttribute('display','inline');
+  document.getElementById('dl-'+t).style.display='block';
+  const L={re:'RE deals · Rhode Island',su:'Startup raises · Rhode Island',bz:'Business acquisitions · RI'};
+  document.getElementById('DLL').textContent=L[t];
+}
+
+function doApprove(){document.getElementById('AOV').classList.add('on');}
+function closeApprove(){document.getElementById('AOV').classList.remove('on');goScr('map',null);}
+function swIntroPane(p){
+  document.getElementById('isub-request').classList.remove('on');
+  document.getElementById('isub-connections').classList.remove('on');
+  document.getElementById('ip-request').classList.remove('on');
+  document.getElementById('ip-connections').classList.remove('on');
+  if(p==='connections'){
+    document.getElementById('isub-connections').classList.add('on');
+    document.getElementById('ip-connections').classList.add('on');
+    document.getElementById('AOV').classList.remove('on');
+    renderIntroConnections();
+  } else {
+    document.getElementById('isub-request').classList.add('on');
+    document.getElementById('ip-request').classList.add('on');
+  }
+}
+
+applyTheme();
+renderIntroConnections();
+</script>
